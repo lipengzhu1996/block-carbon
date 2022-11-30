@@ -1,1 +1,5 @@
-BlockCarbon App
+# BlockCarbon App
+
+## Frontend: React
+
+## Backend: Django
