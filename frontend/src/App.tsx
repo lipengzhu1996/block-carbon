@@ -13,7 +13,6 @@ import background from "./assets/images/homepage-background.jpg";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <div
         style={{
           backgroundImage: `url(${background})`,
@@ -22,6 +21,7 @@ export default function App() {
           width: "100%",
         }}
       >
+        <CssBaseline />
         <Navigation />
         <Routes>
           <Route path="/home" element={<Landing />} />

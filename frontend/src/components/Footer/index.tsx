@@ -15,6 +15,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     width: "90%",
+    height: "10vh",
     margin: "0 auto",
   },
 };

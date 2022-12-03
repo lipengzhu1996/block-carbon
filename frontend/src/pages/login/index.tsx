@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -17,11 +18,13 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
+  inputCardWrapeer: {
+    width: "40vw",
+    height: "90vh",
+  },
   inputCard: {
-    marginTop: "30vh",
-    width: "80vh",
-    height: "80vh",
-    background: "none",
+    position: "relative",
+    top: "20vh",
   },
   textField: {
     width: "100%",
@@ -58,58 +61,67 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   return (
-    <div style={styles.root}>
-      <Box component="form" noValidate autoComplete="off" sx={styles.inputCard}>
-        <EmailTextField
-          label="Email"
-          id="email-input"
-          margin="normal"
-          variant="standard"
-        />
-        <PasswordTextField
-          id="password-input"
-          variant="standard"
-          margin="normal"
+    <Container maxWidth="lg" sx={styles.root}>
+      <Box sx={styles.inputCardWrapeer}>
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          sx={styles.inputCard}
         >
-          <InputLabel htmlFor="outlined-adornment-password">
-            Password
-          </InputLabel>
-          <Input
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setPassword(event.target.value);
-            }}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => {
-                    setShowPassword(!showPassword);
-                  }}
-                  onMouseDown={(event: React.MouseEvent<HTMLButtonElement>) => {
-                    event.preventDefault();
-                  }}
-                  edge="end"
-                >
-                  {showPassword ? (
-                    <VisibilityOff sx={{ color: "#ffffff" }} />
-                  ) : (
-                    <Visibility sx={{ color: "#ffffff" }} />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            }
+          <EmailTextField
+            label="Email"
+            id="email-input"
+            margin="normal"
+            variant="standard"
           />
-        </PasswordTextField>
-        <Box sx={styles.buttonGroup}>
-          <Button variant="outlined" size="large" sx={{ width: "40%" }}>
-            Sign up
-          </Button>
-          <Button variant="contained" size="large" sx={{ width: "40%" }}>
-            Log in
-          </Button>
+          <PasswordTextField
+            id="password-input"
+            variant="standard"
+            margin="normal"
+          >
+            <InputLabel htmlFor="outlined-adornment-password">
+              Password
+            </InputLabel>
+            <Input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(event.target.value);
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                    onMouseDown={(
+                      event: React.MouseEvent<HTMLButtonElement>
+                    ) => {
+                      event.preventDefault();
+                    }}
+                    edge="end"
+                  >
+                    {showPassword ? (
+                      <VisibilityOff sx={{ color: "#ffffff" }} />
+                    ) : (
+                      <Visibility sx={{ color: "#ffffff" }} />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </PasswordTextField>
+          <Box sx={styles.buttonGroup}>
+            <Button variant="outlined" size="large" sx={{ width: "40%" }}>
+              Sign up
+            </Button>
+            <Button variant="contained" size="large" sx={{ width: "40%" }}>
+              Log in
+            </Button>
+          </Box>
         </Box>
       </Box>
-    </div>
+    </Container>
   );
 }
