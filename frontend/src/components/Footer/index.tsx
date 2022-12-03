@@ -1,6 +1,3 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -18,15 +15,10 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     width: "90%",
+    height: "10vh",
     margin: "0 auto",
   },
 };
-
-const Item = styled(Paper)(({ theme }) => ({
-  background: "none",
-  padding: theme.spacing(1),
-  textAlign: "center",
-}));
 
 export default function Footer() {
   return (
@@ -43,32 +35,24 @@ export default function Footer() {
         <Box>
           <Grid container spacing={0}>
             <Grid item xs="auto">
-              <Item elevation={0}>
-                <IconButton aria-label="Example">
-                  <EmailIcon />
-                </IconButton>
-              </Item>
+              <IconButton aria-label="Example">
+                <EmailIcon />
+              </IconButton>
             </Grid>
             <Grid item xs="auto">
-              <Item elevation={0}>
-                <IconButton aria-label="Example">
-                  <FacebookIcon />
-                </IconButton>
-              </Item>
+              <IconButton aria-label="Example">
+                <FacebookIcon />
+              </IconButton>
             </Grid>
             <Grid item xs="auto">
-              <Item elevation={0}>
-                <IconButton aria-label="Example">
-                  <InstagramIcon />
-                </IconButton>
-              </Item>
+              <IconButton aria-label="Example">
+                <InstagramIcon />
+              </IconButton>
             </Grid>
             <Grid item xs="auto">
-              <Item elevation={0}>
-                <IconButton aria-label="Example">
-                  <GitHubIcon />
-                </IconButton>
-              </Item>
+              <IconButton aria-label="Example">
+                <GitHubIcon />
+              </IconButton>
             </Grid>
           </Grid>
         </Box>
