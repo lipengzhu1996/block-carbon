@@ -1,10 +1,13 @@
-import * as React from "react";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
+// import Menu from "@mui/material/Menu";
+// import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 const styles = {
   root: {
@@ -22,6 +25,12 @@ const styles = {
   appbarTitle: {
     flexGrow: "1",
   },
+  appbarBox: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginRight: "auto",
+  },
   colorText: {
     color: "#5AFF3D",
   },
@@ -34,18 +43,22 @@ const styles = {
   },
 };
 
-const LoginMenu = ["Landowners", "Carbon Buyers"];
+const Item = styled(Paper)(({ theme }) => ({
+  background: "none",
+  padding: theme.spacing(1),
+  textAlign: "center",
+}));
 
 export default function Navigation() {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  //   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+  //     null
+  //   );
+  //   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //     setAnchorElUser(event.currentTarget);
+  //   };
+  //   const handleCloseUserMenu = () => {
+  //     setAnchorElUser(null);
+  //   };
 
   return (
     <div style={styles.root} id="header">
@@ -60,39 +73,40 @@ export default function Navigation() {
           >
             <span style={styles.colorText}>Block</span>Carbon
           </Typography>
+          <Box>
+            <Box sx={styles.appbarBox}>
+              <Grid container spacing={4}>
+                <Grid item xs="auto">
+                  <Item elevation={0}>
+                    <Link href="#">
+                      <Typography color="#ffffff" component="p" variant="body2">
+                        Technologies
+                      </Typography>
+                    </Link>
+                  </Item>
+                </Grid>
+                <Grid item xs="auto">
+                  <Item elevation={0}>
+                    <Link href="#">
+                      <Typography color="#ffffff" component="p" variant="body2">
+                        Dashboard
+                      </Typography>
+                    </Link>
+                  </Item>
+                </Grid>
+                <Grid item xs="auto">
+                  <Item elevation={0}>
+                    <Link href="#">
+                      <Typography color="#ffffff" component="p" variant="body2">
+                        Login
+                      </Typography>
+                    </Link>
+                  </Item>
+                </Grid>
+              </Grid>
+            </Box>
 
-          <div style={{ justifyContent: "center" }}>
-            <Button id="composition-button" href="/">
-              <Typography
-                variant="body1"
-                noWrap
-                component="a"
-                sx={styles.buttonText}
-              >
-                Technologies
-              </Typography>
-            </Button>
-            <Button id="composition-button" href="/">
-              <Typography
-                variant="body1"
-                noWrap
-                component="a"
-                sx={styles.buttonText}
-              >
-                Dashboard
-              </Typography>
-            </Button>
-            <Button id="composition-button" onClick={handleOpenUserMenu}>
-              <Typography
-                variant="body1"
-                noWrap
-                component="a"
-                sx={styles.buttonText}
-              >
-                Login
-              </Typography>
-            </Button>
-            <Menu
+            {/* <Menu
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -112,8 +126,8 @@ export default function Navigation() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
-          </div>
+            </Menu> */}
+          </Box>
         </Toolbar>
       </AppBar>
     </div>
