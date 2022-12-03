@@ -20,11 +20,11 @@ const styles = {
   },
   inputCardWrapeer: {
     width: "40vw",
-    height: "90vh",
+    height: "100vh",
   },
   inputCard: {
     position: "relative",
-    top: "20vh",
+    top: "30vh",
   },
   textField: {
     width: "100%",

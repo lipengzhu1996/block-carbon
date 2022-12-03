@@ -21,7 +21,7 @@ const styles = {
   },
   titleWrapper: {
     width: "40vw",
-    height: "40vh",
+    height: "50vh",
   },
   buttonWrapper: {
     display: "flex",
@@ -42,7 +42,7 @@ const styles = {
   },
   title: {
     position: "relative",
-    top: "20vh",
+    top: "30vh",
     fontFamily: "monospace",
     fontWeight: 700,
     letterSpacing: ".1rem",
