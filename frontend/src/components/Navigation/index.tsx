@@ -1,4 +1,3 @@
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -6,7 +5,6 @@ import Typography from "@mui/material/Typography";
 // import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 const styles = {
@@ -43,12 +41,6 @@ const styles = {
   },
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-  background: "none",
-  padding: theme.spacing(1),
-  textAlign: "center",
-}));
-
 export default function Navigation() {
   //   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
   //     null
@@ -77,31 +69,25 @@ export default function Navigation() {
             <Box sx={styles.appbarBox}>
               <Grid container spacing={4}>
                 <Grid item xs="auto">
-                  <Item elevation={0}>
-                    <Link href="#">
-                      <Typography color="#ffffff" component="p" variant="body2">
-                        Technologies
-                      </Typography>
-                    </Link>
-                  </Item>
+                  <Link href="#">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Technologies
+                    </Typography>
+                  </Link>
                 </Grid>
                 <Grid item xs="auto">
-                  <Item elevation={0}>
-                    <Link href="#">
-                      <Typography color="#ffffff" component="p" variant="body2">
-                        Dashboard
-                      </Typography>
-                    </Link>
-                  </Item>
+                  <Link href="#">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Dashboard
+                    </Typography>
+                  </Link>
                 </Grid>
                 <Grid item xs="auto">
-                  <Item elevation={0}>
-                    <Link href="#">
-                      <Typography color="#ffffff" component="p" variant="body2">
-                        Login
-                      </Typography>
-                    </Link>
-                  </Item>
+                  <Link href="/login">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Login
+                    </Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </Box>
