@@ -25,7 +25,7 @@ export default function Footer() {
     <Container maxWidth="lg">
       <Toolbar disableGutters style={styles.footerWrapper}>
         <Typography
-          color="textSecondary"
+          color="#ffffff"
           component="p"
           variant="caption"
           gutterBottom={false}
@@ -36,22 +36,22 @@ export default function Footer() {
           <Grid container spacing={0}>
             <Grid item xs="auto">
               <IconButton aria-label="Example">
-                <EmailIcon />
+                <EmailIcon sx={{ color: "#ffffff" }} />
               </IconButton>
             </Grid>
             <Grid item xs="auto">
               <IconButton aria-label="Example">
-                <FacebookIcon />
+                <FacebookIcon sx={{ color: "#ffffff" }} />
               </IconButton>
             </Grid>
             <Grid item xs="auto">
               <IconButton aria-label="Example">
-                <InstagramIcon />
+                <InstagramIcon sx={{ color: "#ffffff" }} />
               </IconButton>
             </Grid>
             <Grid item xs="auto">
               <IconButton aria-label="Example">
-                <GitHubIcon />
+                <GitHubIcon sx={{ color: "#ffffff" }} />
               </IconButton>
             </Grid>
           </Grid>
