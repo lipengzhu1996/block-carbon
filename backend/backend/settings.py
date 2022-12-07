@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'frontend',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +81,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+
+# GraphQL Schema
+# https://github.com/graphql-python/graphene-django
+
+GRAPHENE = {
+    'SCHEMA': 'frontend.schema.schema'
 }
 
 
