@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Landing from "./pages/landing";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import Projects from "./pages/projects";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/home" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
         <Footer />

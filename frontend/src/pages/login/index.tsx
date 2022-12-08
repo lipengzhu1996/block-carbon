@@ -21,7 +21,7 @@ const styles = {
   },
   inputCard: {
     position: "relative",
-    top: "30vh",
+    top: "20vh",
   },
   textField: {
     width: "100%",

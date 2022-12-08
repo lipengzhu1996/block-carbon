@@ -36,7 +36,11 @@ type Props = {
   description: string;
 };
 
-export default function ProjectBriefCard({ image, title, description }: Props) {
+export default function ProjectGalleryCard({
+  image,
+  title,
+  description,
+}: Props) {
   return (
     <Container maxWidth="lg" sx={styles.root}>
       <Card sx={styles.cardWrapper}>
