@@ -1,7 +1,9 @@
-import * as React from "react";
+import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import { Map, NavigationControl } from "maplibre-gl";
+
 import ProjectPreviewCard from "../../components/Card/ProjectPreviewCard";
 
 const styles = {
@@ -32,6 +34,19 @@ const styles = {
 };
 
 export default function Projects() {
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (mapContainerRef.current != null) {
+      const map = new Map({
+        container: mapContainerRef.current,
+        style:
+          "https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
+        zoom: 9,
+        center: [137.9150899566626, 36.25956997955441],
+      });
+      map.addControl(new NavigationControl({}));
+    }
+  });
   return (
     <Container maxWidth="lg" sx={styles.root}>
       <Box sx={styles.listWrapper}>
@@ -63,11 +78,13 @@ export default function Projects() {
           id={"VM0012"}
         />
       </Box>
-      <Box>
-        <Typography variant="h1" noWrap>
-          Mapbox placeholder
-        </Typography>
-      </Box>
+      <div
+        ref={mapContainerRef}
+        style={{
+          width: "40vw",
+          height: "80vh",
+        }}
+      />
     </Container>
   );
 }
