@@ -6,6 +6,9 @@ import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+
 import PasswordInputField from "../../components/PasswordInputField";
 
 const styles = {
@@ -17,11 +20,11 @@ const styles = {
   inputCardWrapeer: {
     width: "40vw",
     height: "100vh",
-    minHeight: "400px",
+    minHeight: "600px",
   },
   inputCard: {
     position: "relative",
-    top: "30vh",
+    top: "20vh",
   },
   textField: {
     width: "100%",
@@ -44,18 +47,21 @@ const styles = {
       borderBottomColor: "white",
     },
   },
-  buttonGroup: {
+  button: {
     marginTop: "10vh",
-    display: "flex",
-    justifyContent: "space-between",
+  },
+  signinText: {
+    marginTop: "4vh",
   },
 };
 
+const NameTextField = styled(TextField)(styles.textField);
 const EmailTextField = styled(TextField)(styles.textField);
 const PasswordFormControl = styled(FormControl)(styles.textField);
 
-export default function Login() {
+export default function Signup() {
   const [password, setPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
 
   return (
     <Container maxWidth="lg" sx={styles.root}>
@@ -66,6 +72,12 @@ export default function Login() {
           autoComplete="off"
           sx={styles.inputCard}
         >
+          <NameTextField
+            label="Name"
+            id="name-input"
+            margin="normal"
+            variant="standard"
+          />
           <EmailTextField
             label="Email"
             id="email-input"
@@ -82,18 +94,31 @@ export default function Login() {
             </InputLabel>
             <PasswordInputField value={password} onChange={setPassword} />
           </PasswordFormControl>
-          <Box sx={styles.buttonGroup}>
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{ width: "40%" }}
-              href={"/signup"}
-            >
-              Sign up
+          <PasswordFormControl
+            id="confirmed-password-input"
+            variant="standard"
+            margin="normal"
+          >
+            <InputLabel htmlFor="outlined-adornment-password">
+              Confirmed Password
+            </InputLabel>
+            <PasswordInputField
+              value={confirmedPassword}
+              onChange={setConfirmedPassword}
+            />
+          </PasswordFormControl>
+          <Box sx={styles.button}>
+            <Button variant="contained" size="large" sx={{ width: "100%" }}>
+              Create Account
             </Button>
-            <Button variant="contained" size="large" sx={{ width: "40%" }}>
-              Log in
-            </Button>
+          </Box>
+          <Box sx={styles.signinText}>
+            <Typography gutterBottom variant="body2" sx={{ color: "#fff" }}>
+              Already have an account?{" "}
+              <Link href="/login" color="inherit">
+                Sign in
+              </Link>
+            </Typography>
           </Box>
         </Box>
       </Box>

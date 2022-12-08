@@ -6,8 +6,12 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
 
 const styles = {
+  appbar: {
+    background: "none",
+  },
   appbarWrapper: {
     display: "flex",
     justifyContent: "space-between",
@@ -49,44 +53,45 @@ export default function Navigation() {
 
   return (
     <Container maxWidth="lg">
-      <Toolbar disableGutters style={styles.appbarWrapper}>
-        <Typography
-          variant="h3"
-          noWrap
-          component="a"
-          href="/"
-          sx={styles.buttonText}
-        >
-          <span style={styles.colorText}>Block</span>Carbon
-        </Typography>
-        <Box>
-          <Box sx={styles.appbarBox}>
-            <Grid container spacing={4}>
-              <Grid item xs="auto">
-                <Link href="#">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Technologies
-                  </Typography>
-                </Link>
+      <AppBar sx={styles.appbar} elevation={0}>
+        <Toolbar disableGutters sx={styles.appbarWrapper}>
+          <Typography
+            variant="h3"
+            noWrap
+            component="a"
+            href="/"
+            sx={styles.buttonText}
+          >
+            <span style={styles.colorText}>Block</span>Carbon
+          </Typography>
+          <Box>
+            <Box sx={styles.appbarBox}>
+              <Grid container spacing={4}>
+                <Grid item xs="auto">
+                  <Link href="#">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Technologies
+                    </Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs="auto">
+                  <Link href="#">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Dashboard
+                    </Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs="auto">
+                  <Link href="/login">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Login
+                    </Typography>
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item xs="auto">
-                <Link href="#">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Dashboard
-                  </Typography>
-                </Link>
-              </Grid>
-              <Grid item xs="auto">
-                <Link href="/login">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Login
-                  </Typography>
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
 
-          {/* <Menu
+            {/* <Menu
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -107,8 +112,9 @@ export default function Navigation() {
                 </MenuItem>
               ))}
             </Menu> */}
-        </Box>
-      </Toolbar>
+          </Box>
+        </Toolbar>
+      </AppBar>
     </Container>
   );
 }
