@@ -37,7 +37,7 @@ export default function ProjectPreviewCard({
   id,
 }: Props) {
   return (
-    <IconButton>
+    <IconButton href="/project">
       <Paper sx={styles.card} elevation={4}>
         <img src={img} alt={"img"} loading="lazy" style={styles.img} />
         <Box sx={styles.textWrapper}>
