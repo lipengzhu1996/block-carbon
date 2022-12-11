@@ -87,6 +87,7 @@ export default function Projects() {
               description={"Improved Forest Management"}
               area={"514 hectares"}
               id={"VM0012"}
+              href={"./project"}
             />
           </div>
           <div id="project-2">
@@ -99,6 +100,7 @@ export default function Projects() {
               description={"REDD"}
               area={"5142 hectares"}
               id={"VM0012"}
+              href={"./project"}
             />
           </div>
         </div>

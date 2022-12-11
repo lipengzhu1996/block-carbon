@@ -68,6 +68,13 @@ export default function Navigation() {
                 </Link>
               </Grid>
               <Grid item xs="auto">
+                <Link href="/dashboard">
+                  <Typography color="#ffffff" component="p" variant="body2">
+                    Dashboard
+                  </Typography>
+                </Link>
+              </Grid>
+              <Grid item xs="auto">
                 <Link href="/login">
                   <Typography color="#ffffff" component="p" variant="body2">
                     Login

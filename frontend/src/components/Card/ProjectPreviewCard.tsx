@@ -26,8 +26,11 @@ type Props = {
   description: string;
   area: string;
   id: string;
+  href?: string;
+  onClick?: () => void;
 };
 
+// TODO: Pass in project object as props
 export default function ProjectPreviewCard({
   img,
   country,
@@ -35,9 +38,11 @@ export default function ProjectPreviewCard({
   description,
   area,
   id,
+  href,
+  onClick,
 }: Props) {
   return (
-    <IconButton href="/project">
+    <IconButton onClick={onClick} href={href ?? ""}>
       <Paper sx={styles.card} elevation={4}>
         <img src={img} alt={"img"} loading="lazy" style={styles.img} />
         <Box sx={styles.textWrapper}>
