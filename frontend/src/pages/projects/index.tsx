@@ -2,10 +2,13 @@ import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { Map, NavigationControl } from "maplibre-gl";
+import { LngLatLike, Map, Marker, NavigationControl } from "maplibre-gl";
+import ReactDOM from "react-dom";
+
 import "./styles.css";
 
 import ProjectPreviewCard from "../../components/Card/ProjectPreviewCard";
+import DropletMarker from "../../components/DropletMarker";
 
 const styles = {
   root: {
@@ -40,7 +43,25 @@ export default function Projects() {
         zoom: 9,
         center: [137.9150899566626, 36.25956997955441],
       });
-      map.addControl(new NavigationControl({}));
+      map.addControl(new NavigationControl({}), "top-right");
+      [
+        [137.8, 36.3],
+        [137.9150899566626, 36.25956997955441],
+      ].forEach((location) => {
+        const markerEl = document.createElement("div");
+        ReactDOM.render(
+          <DropletMarker
+            onClick={() => {
+              const divToScrollTo = document.getElementById("project-2");
+              if (divToScrollTo) {
+                divToScrollTo.scrollIntoView();
+              }
+            }}
+          />,
+          markerEl
+        );
+        new Marker(markerEl).setLngLat(location as LngLatLike).addTo(map);
+      });
     }
   });
   return (
@@ -58,22 +79,30 @@ export default function Projects() {
             scientists to make sure your investment reduces carbon, protects
             wildlife and supports local communities.
           </Typography>
-          <ProjectPreviewCard
-            img={"https://images.unsplash.com/photo-1518756131217-31eb79b20e8f"}
-            country={"United States"}
-            location={"King Country Park"}
-            description={"Improved Forest Management"}
-            area={"514 hectares"}
-            id={"VM0012"}
-          />
-          <ProjectPreviewCard
-            img={"https://images.unsplash.com/photo-1471357674240-e1a485acb3e1"}
-            country={"Indonesia"}
-            location={"Central Peatlands"}
-            description={"REDD"}
-            area={"5142 hectares"}
-            id={"VM0012"}
-          />
+          <div id="project-1">
+            <ProjectPreviewCard
+              img={
+                "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f"
+              }
+              country={"United States"}
+              location={"King Country Park"}
+              description={"Improved Forest Management"}
+              area={"514 hectares"}
+              id={"VM0012"}
+            />
+          </div>
+          <div id="project-2">
+            <ProjectPreviewCard
+              img={
+                "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1"
+              }
+              country={"Indonesia"}
+              location={"Central Peatlands"}
+              description={"REDD"}
+              area={"5142 hectares"}
+              id={"VM0012"}
+            />
+          </div>
         </Box>
       </Box>
       <div
