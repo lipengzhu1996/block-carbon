@@ -1,7 +1,5 @@
 import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 import { LngLatLike, Map, Marker, NavigationControl } from "maplibre-gl";
 import ReactDOM from "react-dom";
 
@@ -65,9 +63,9 @@ export default function Projects() {
     }
   });
   return (
-    <Container maxWidth="lg" sx={styles.root}>
-      <Box className="list-wrapper">
-        <Box className="scrollable-wrapper">
+    <div style={styles.root}>
+      <div className="list-wrapper">
+        <div className="scrollable-wrapper">
           <Typography variant="h2" sx={styles.title}>
             Projects
           </Typography>
@@ -103,15 +101,15 @@ export default function Projects() {
               id={"VM0012"}
             />
           </div>
-        </Box>
-      </Box>
+        </div>
+      </div>
       <div
         ref={mapContainerRef}
         style={{
-          width: "40vw",
+          width: "50vw",
           height: "80vh",
         }}
       />
-    </Container>
+    </div>
   );
 }

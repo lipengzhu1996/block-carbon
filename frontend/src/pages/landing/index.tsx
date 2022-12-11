@@ -63,7 +63,12 @@ export default function Landing() {
         <Button variant="outlined" size="large" sx={{ width: "40%" }}>
           Landowners
         </Button>
-        <Button variant="outlined" size="large" sx={{ width: "40%" }}>
+        <Button
+          variant="outlined"
+          size="large"
+          sx={{ width: "40%" }}
+          href={"./projects"}
+        >
           Carbon Buyers
         </Button>
       </Box>
@@ -89,6 +94,7 @@ export default function Landing() {
             description={
               "We filter out area of interest (AOI) by leveraing AI to read terabyte btypes of satellite images. In this project, we identify locations that found to have mangrove growth between year 1999 and 2019."
             }
+            link={"./project"}
           />
           <ProjectGalleryCard
             image={island2}
@@ -96,6 +102,7 @@ export default function Landing() {
             description={
               "We filter out area of interest (AOI) by leveraing AI to read terabyte btypes of satellite images. In this project, we identify locations that found to have mangrove growth between year 1999 and 2019."
             }
+            link={"./project"}
           />
         </Box>
       </Element>

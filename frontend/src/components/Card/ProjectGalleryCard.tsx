@@ -3,6 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import CardActionArea from "@mui/material/CardActionArea";
 
 const styles = {
   root: {
@@ -34,36 +35,40 @@ type Props = {
   image: string;
   title: string;
   description: string;
+  link: string;
 };
 
 export default function ProjectGalleryCard({
   image,
   title,
   description,
+  link,
 }: Props) {
   return (
     <Container maxWidth="lg" sx={styles.root}>
-      <Card sx={styles.cardWrapper}>
-        <CardMedia sx={styles.media} image={image} title="Image" />
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h1"
-            sx={styles.title}
-          >
-            {title}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            sx={styles.desc}
-          >
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
+      <CardActionArea href={link}>
+        <Card sx={styles.cardWrapper}>
+          <CardMedia sx={styles.media} image={image} title="Image" />
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h1"
+              sx={styles.title}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              sx={styles.desc}
+            >
+              {description}
+            </Typography>
+          </CardContent>
+        </Card>
+      </CardActionArea>
     </Container>
   );
 }
