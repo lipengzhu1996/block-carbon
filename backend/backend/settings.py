@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -90,8 +91,17 @@ DATABASES = {
 # https://github.com/graphql-python/graphene-django
 
 GRAPHENE = {
-    'SCHEMA': 'frontend.schema.schema'
+    'SCHEMA': 'frontend.schema.schema',
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
+
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 
 # Add CORS_ORIGIN_WHITELIST to allow these domains be authorized to make cross-site HTTP requests
