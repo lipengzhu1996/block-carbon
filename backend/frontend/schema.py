@@ -35,6 +35,20 @@ class Query(graphene.ObjectType):
         return user
 
 
+class CreateUser(graphene.Mutation):
+    user = graphene.Field(UserType)
+
+    class Arguments:
+        username = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    def mutate(self, info, username, password):
+        user = get_user_model()(username=username)
+        user.set_password(password)
+        user.save()
+        return CreateUser(user=user)
+
+
 class CreateProject(graphene.Mutation):
     project = graphene.Field(ProjectType)
 
@@ -56,23 +70,55 @@ class CreateProject(graphene.Mutation):
         )
 
 
-class CreateUser(graphene.Mutation):
-    user = graphene.Field(UserType)
+class UpdateProject(graphene.Mutation):
+    project = graphene.Field(ProjectType)
 
     class Arguments:
-        username = graphene.String(required=True)
-        password = graphene.String(required=True)
+        id = graphene.Int(required=True)
+        title = graphene.String(required=True)
+        description = graphene.String(required=True)
 
-    def mutate(self, info, username, password):
-        user = get_user_model()(username=username)
-        user.set_password(password)
-        user.save()
-        return CreateUser(user=user)
+    @login_required
+    def mutate(self, info, id, title, description):
+        user = info.context.user
+        project = Project.objects.get(id=id)
+        if user != project.user:
+            raise Exception("Project owner not matched")
+
+        project.title = title
+        project.description = description
+        project.save()
+
+        return UpdateProject(
+            project=project
+        )
+
+
+class DeleteProject(graphene.Mutation):
+    message = graphene.String()
+
+    class Arguments:
+        id = graphene.Int(required=True)
+
+    @login_required
+    def mutate(self, info, id):
+        user = info.context.user
+        project = Project.objects.get(id=id)
+        if user != project.user:
+            raise Exception("Project owner not matched")
+
+        project.delete()
+
+        return DeleteProject(
+            message=f"Project {id} Deleted"
+        )
 
 
 class Mutation(graphene.ObjectType):
-    create_project = CreateProject.Field()
     create_user = CreateUser.Field()
+    create_project = CreateProject.Field()
+    update_project = UpdateProject.Field()
+    delete_project = DeleteProject.Field()
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()
