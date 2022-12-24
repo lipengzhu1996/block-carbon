@@ -14,9 +14,9 @@ You will also see any lint errors in the console.
 
 ### `npm run compile`
 
-Compile graphql with graphql-codegen and add types to gql objects. 
-Compile result will be generated under `src/__generated__`. 
-You should run this command every time you update the gql queries/mutations.
+Compile graphql with graphql-codegen and add types to gql objects.\
+Compile result will be generated under `src/__generated__`.\
+You should run this command every time you update the gql queries/mutations.\
 
 ### `npm run build`
 
