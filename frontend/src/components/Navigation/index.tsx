@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
+import useUser from "../../hooks/useUser";
 
 const styles = {
   appbar: {
@@ -38,6 +39,8 @@ const styles = {
 };
 
 export default function Navigation() {
+  const user = useUser();
+
   return (
     <Container maxWidth="lg">
       <Toolbar disableGutters sx={styles.appbarWrapper}>
@@ -68,18 +71,19 @@ export default function Navigation() {
                 </Link>
               </Grid>
               <Grid item xs="auto">
-                <Link href="/dashboard">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Dashboard
-                  </Typography>
-                </Link>
-              </Grid>
-              <Grid item xs="auto">
-                <Link href="/login">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Login
-                  </Typography>
-                </Link>
+                {user != null ? (
+                  <Link href="/dashboard">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      {user.username}
+                    </Typography>
+                  </Link>
+                ) : (
+                  <Link href="/login">
+                    <Typography color="#ffffff" component="p" variant="body2">
+                      Login
+                    </Typography>
+                  </Link>
+                )}
               </Grid>
             </Grid>
           </Box>
