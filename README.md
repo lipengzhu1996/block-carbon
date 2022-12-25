@@ -5,7 +5,8 @@
 - Typescript: Type check
 - Material UI: UI library
 - GraphQL: Query language for APIs
+- MapLibre: Open source mapbox fork
 
 ## Backend: Django
 
-- JWT: Authentication
+- django-graphql-jwt, django-graphql-auth: JWT authentication
