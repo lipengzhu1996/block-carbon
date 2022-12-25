@@ -23,7 +23,6 @@ import typography from "./base/typography";
 import globals from "./base/globals";
 
 import flatpickr from "./components/flatpickr";
-import container from "./components/container";
 
 export default createTheme({
   palette: { ...colors },
@@ -34,7 +33,6 @@ export default createTheme({
       styleOverrides: {
         ...globals,
         ...flatpickr,
-        ...container,
       },
     },
   },
