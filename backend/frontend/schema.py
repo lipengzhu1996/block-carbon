@@ -1,8 +1,8 @@
 import graphene
-import graphql_jwt
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
 from django.contrib.auth import get_user_model
+from graphql_auth import mutations
 
 from frontend.models import Project
 
@@ -33,20 +33,6 @@ class Query(graphene.ObjectType):
         if user.is_anonymous:
             raise Exception("Login Required")
         return user
-
-
-class CreateUser(graphene.Mutation):
-    user = graphene.Field(UserType)
-
-    class Arguments:
-        username = graphene.String(required=True)
-        password = graphene.String(required=True)
-
-    def mutate(self, info, username, password):
-        user = get_user_model()(username=username)
-        user.set_password(password)
-        user.save()
-        return CreateUser(user=user)
 
 
 class CreateProject(graphene.Mutation):
@@ -115,13 +101,29 @@ class DeleteProject(graphene.Mutation):
 
 
 class Mutation(graphene.ObjectType):
-    create_user = CreateUser.Field()
     create_project = CreateProject.Field()
     update_project = UpdateProject.Field()
     delete_project = DeleteProject.Field()
-    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
-    verify_token = graphql_jwt.Verify.Field()
-    refresh_token = graphql_jwt.Refresh.Field()
+
+    # graphql_auth
+    register = mutations.Register.Field()
+    verify_account = mutations.VerifyAccount.Field()
+    resend_activation_email = mutations.ResendActivationEmail.Field()
+    send_password_reset_email = mutations.SendPasswordResetEmail.Field()
+    password_reset = mutations.PasswordReset.Field()
+    password_change = mutations.PasswordChange.Field()
+    archive_account = mutations.ArchiveAccount.Field()
+    delete_account = mutations.DeleteAccount.Field()
+    update_account = mutations.UpdateAccount.Field()
+    send_secondary_email_activation = mutations.SendSecondaryEmailActivation.Field()
+    verify_secondary_email = mutations.VerifySecondaryEmail.Field()
+    swap_emails = mutations.SwapEmails.Field()
+
+    # django-graphql-jwt inheritances
+    token_auth = mutations.ObtainJSONWebToken.Field()
+    verify_token = mutations.VerifyToken.Field()
+    refresh_token = mutations.RefreshToken.Field()
+    revoke_token = mutations.RevokeToken.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

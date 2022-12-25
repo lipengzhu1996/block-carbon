@@ -13,13 +13,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  mutation Login($username: String!, $password: String!) {\n    tokenAuth(username: $username, password: $password) {\n      token\n    }\n  }\n": types.LoginDocument,
+    "\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n": types.LoginDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation Login($username: String!, $password: String!) {\n    tokenAuth(username: $username, password: $password) {\n      token\n    }\n  }\n"): (typeof documents)["\n  mutation Login($username: String!, $password: String!) {\n    tokenAuth(username: $username, password: $password) {\n      token\n    }\n  }\n"];
+export function gql(source: "\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

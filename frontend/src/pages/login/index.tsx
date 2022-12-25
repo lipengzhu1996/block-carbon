@@ -65,9 +65,11 @@ const EmailTextField = styled(TextField)(styles.textField);
 const PasswordFormControl = styled(FormControl)(styles.textField);
 
 const LOGIN_MUTATION = gql(`
-  mutation Login($username: String!, $password: String!) {
-    tokenAuth(username: $username, password: $password) {
+  mutation Login ($password: String!, $email: String, $username: String) {
+    tokenAuth(password: $password, email: $email, username: $username) {
       token
+      errors
+      success
     }
   }
 `);
@@ -86,7 +88,7 @@ export default function Login() {
         window.location.href = "/home";
       } else {
         // TODO: Add error message
-        alert("Somthing is Wrong! Try Agan!!");
+        setError("Please check your username and password");
       }
     },
     onError(error) {
