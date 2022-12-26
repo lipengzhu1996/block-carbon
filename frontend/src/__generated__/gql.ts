@@ -14,12 +14,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n": types.LoginDocument,
+    "\n  mutation Register($email: String!, $username: String!, $password1: String!, $password2: String!) {\n    register(email: $email, username: $username, password1: $password1, password2: $password2) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n": types.RegisterDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Register($email: String!, $username: String!, $password1: String!, $password2: String!) {\n    register(email: $email, username: $username, password1: $password1, password2: $password2) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n"): (typeof documents)["\n  mutation Register($email: String!, $username: String!, $password1: String!, $password2: String!) {\n    register(email: $email, username: $username, password1: $password1, password2: $password2) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
