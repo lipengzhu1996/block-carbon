@@ -1,5 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { Map, NavigationControl } from "maplibre-gl";
 import "./styles.css";
 
@@ -8,18 +11,24 @@ const styles = {
     width: "100%",
     height: "90vh",
     overflow: "hidden",
-  },
-  mapWrapper: {
-    width: "100%",
-    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   cardWrapper: {
-    position: "absolute",
-    zIndex: "1",
-    width: "40vw",
-    height: "90vh",
+    width: "95%",
+    height: "95%",
+    borderRadius: "25px",
+    boxShadow: "0 0 10px black",
     background: "rgba(0,0,0,0.5)",
+    display: "flex",
+    flexDirection: "row",
   } as React.CSSProperties,
+  mapWrapper: {
+    width: "75%",
+    height: "100%",
+    borderRadius: "25px",
+  },
   textWrapper: {
     textAlign: "start",
     padding: "4vw",
@@ -30,26 +39,90 @@ const styles = {
 };
 
 export default function Project() {
+  const [forestChecked, setForestChecked] = useState(true);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (mapContainerRef.current != null) {
       const map = new Map({
         container: mapContainerRef.current,
         style:
           "https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
-        zoom: 9,
-        center: [137.9150899566626, 36.25956997955441],
+        zoom: 11,
+        center: [-43.206091, -22.920387],
       });
       map.addControl(new NavigationControl({}));
+      map.on("load", function () {
+        map.addSource("rio_cats", {
+          type: "geojson",
+          data: `https://docs.maptiler.com/maplibre-gl-js/geojson-polygon/rio_cats.geojson`,
+        });
+        map.addLayer({
+          id: "rio_cats",
+          type: "fill",
+          source: "rio_cats",
+          layout: {},
+          paint: {
+            "fill-color": "#98b",
+            "fill-opacity": 0.8,
+          },
+        });
+      });
     }
   });
 
   return (
     <div style={styles.root}>
-      <div ref={mapContainerRef} style={styles.mapWrapper}>
-        <div className="card-wrapper">
-          <div className="scrollable-wrapper">
-            <div style={{ margin: "4vw" }}>
+      <div style={styles.cardWrapper}>
+        <div ref={mapContainerRef} style={styles.mapWrapper}>
+          <div className="infobox">
+            <FormGroup sx={{ margin: "3vh" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    defaultChecked
+                    checked={forestChecked}
+                    onChange={(event, checked) => {
+                      setForestChecked(checked);
+                    }}
+                  />
+                }
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Forest
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Time Series
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Carbon
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Age
+                  </Typography>
+                }
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div style={{ width: "20%", margin: "1vw" }}>
+          <div className="card-wrapper">
+            <div className="scrollable-wrapper">
               <Typography variant="body2" sx={{ color: "#34eb92" }}>
                 Indonesia
               </Typography>
@@ -59,57 +132,25 @@ export default function Project() {
               <Typography variant="body2" sx={{ color: "#fff" }}>
                 REDD
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "#fff", marginTop: "4vh", fontWeight: "bold" }}
-              >
-                WHY WE LOVE THIS PROJECT?
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
+              {forestChecked ? (
+                <div>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "#fff", marginTop: "4vh", fontWeight: "bold" }}
+                  >
+                    WHY WE LOVE THIS PROJECT?
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#fff" }}>
+                    Pachama has evaluated over 150 forest carbon projects across
+                    14 countries to help you identify the highest quality
+                    projects. Here, you'll find projects with credits currently
+                    available for purchase. Each project is carefully vetted by
+                    Pachama's technology and forest scientists to make sure your
+                    investment reduces carbon, protects wildlife and supports
+                    local communities.
+                  </Typography>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

@@ -28,6 +28,12 @@ const styles = {
   img: {
     height: "20vh",
   },
+  mapWrapper: {
+    width: "50vw",
+    height: "80vh",
+    borderRadius: "25px",
+    boxShadow: "0 0 10px black",
+  },
 };
 
 export default function Projects() {
@@ -105,13 +111,7 @@ export default function Projects() {
           </div>
         </div>
       </div>
-      <div
-        ref={mapContainerRef}
-        style={{
-          width: "50vw",
-          height: "80vh",
-        }}
-      />
+      <div ref={mapContainerRef} style={styles.mapWrapper} />
     </div>
   );
 }

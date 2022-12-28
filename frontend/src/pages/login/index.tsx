@@ -75,7 +75,7 @@ const LOGIN_MUTATION = gql(`
 `);
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [, setToken] = useToken();
@@ -110,9 +110,9 @@ export default function Login() {
             id="email-input"
             margin="normal"
             variant="standard"
-            value={username}
+            value={email}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setUsername(event.target.value);
+              setEmail(event.target.value);
             }}
           />
           <PasswordFormControl
@@ -126,7 +126,7 @@ export default function Login() {
             <PasswordInputField value={password} onChange={setPassword} />
           </PasswordFormControl>
           <Box sx={styles.errorText}>
-            <Typography variant="body2" sx={{ color: "#ff0000" }}>
+            <Typography variant="body2" sx={{ color: "#fc0352" }}>
               {error}
             </Typography>
           </Box>
@@ -145,7 +145,7 @@ export default function Login() {
               sx={{ width: "40%" }}
               onClick={() => {
                 tokenAuth({
-                  variables: { username: username, password: password },
+                  variables: { email: email, password: password },
                 });
               }}
             >

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -10,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
 import PasswordInputField from "../../components/PasswordInputField";
+import { gql } from "../../__generated__/gql";
+import useToken from "../../hooks/useToken";
 
 const styles = {
   root: {
@@ -24,7 +27,7 @@ const styles = {
   },
   inputCard: {
     position: "relative",
-    top: "10vh",
+    top: "4vh",
   },
   textField: {
     width: "100%",
@@ -48,9 +51,13 @@ const styles = {
     },
   },
   button: {
-    marginTop: "10vh",
+    marginTop: "4vh",
   },
   signinText: {
+    marginTop: "4vh",
+  },
+  errorText: {
+    height: "4vh",
     marginTop: "4vh",
   },
 };
@@ -59,9 +66,46 @@ const NameTextField = styled(TextField)(styles.textField);
 const EmailTextField = styled(TextField)(styles.textField);
 const PasswordFormControl = styled(FormControl)(styles.textField);
 
+const REGISTER_MUTATION = gql(`
+  mutation Register($email: String!, $username: String!, $password1: String!, $password2: String!) {
+    register(email: $email, username: $username, password1: $password1, password2: $password2) {
+      success
+      errors
+      token
+      refreshToken
+    }
+  }
+`);
+
 export default function Signup() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const [, setToken] = useToken();
+
+  const [register] = useMutation(REGISTER_MUTATION, {
+    onCompleted(data) {
+      const register = data?.register;
+      if (register != null) {
+        const { success, token } = register;
+        if (success === true && token != null) {
+          setToken(token);
+          window.location.href = "/home";
+        } else {
+          // TODO: Add error message
+          setError("Please try again");
+        }
+      } else {
+        setError("Please try again");
+      }
+    },
+    onError(error) {
+      setError(error.message);
+    },
+  });
 
   return (
     <Container maxWidth="lg" sx={styles.root}>
@@ -73,16 +117,24 @@ export default function Signup() {
           sx={styles.inputCard}
         >
           <NameTextField
-            label="Name"
-            id="name-input"
+            label="Username"
+            id="username-input"
             margin="normal"
             variant="standard"
+            value={username}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setUsername(event.target.value);
+            }}
           />
           <EmailTextField
             label="Email"
             id="email-input"
             margin="normal"
             variant="standard"
+            value={email}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(event.target.value);
+            }}
           />
           <PasswordFormControl
             id="password-input"
@@ -107,8 +159,31 @@ export default function Signup() {
               onChange={setConfirmedPassword}
             />
           </PasswordFormControl>
+          <Box sx={styles.errorText}>
+            <Typography variant="body2" sx={{ color: "#fc0352" }}>
+              {error}
+            </Typography>
+          </Box>
           <Box sx={styles.button}>
-            <Button variant="contained" size="large" sx={{ width: "100%" }}>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{ width: "100%" }}
+              onClick={() => {
+                if (confirmedPassword !== password) {
+                  setError("Password and confirm password does not match");
+                } else {
+                  register({
+                    variables: {
+                      email: email,
+                      username: username,
+                      password1: password,
+                      password2: confirmedPassword,
+                    },
+                  });
+                }
+              }}
+            >
               Create Account
             </Button>
           </Box>
