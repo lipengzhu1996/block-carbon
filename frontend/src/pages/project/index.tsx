@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -39,7 +39,9 @@ const styles = {
 };
 
 export default function Project() {
+  const [forestChecked, setForestChecked] = useState(true);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (mapContainerRef.current != null) {
       const map = new Map({
@@ -76,12 +78,45 @@ export default function Project() {
           <div className="infobox">
             <FormGroup sx={{ margin: "3vh" }}>
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="林地"
+                control={
+                  <Checkbox
+                    defaultChecked
+                    checked={forestChecked}
+                    onChange={(event, checked) => {
+                      setForestChecked(checked);
+                    }}
+                  />
+                }
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Forest
+                  </Typography>
+                }
               />
-              <FormControlLabel control={<Checkbox />} label="时空影像" />
-              <FormControlLabel control={<Checkbox />} label="森林变化" />
-              <FormControlLabel control={<Checkbox />} label="固碳量" />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Time Series
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Carbon
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                    Age
+                  </Typography>
+                }
+              />
             </FormGroup>
           </div>
         </div>
@@ -97,21 +132,25 @@ export default function Project() {
               <Typography variant="body2" sx={{ color: "#fff" }}>
                 REDD
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "#fff", marginTop: "4vh", fontWeight: "bold" }}
-              >
-                WHY WE LOVE THIS PROJECT?
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                Pachama has evaluated over 150 forest carbon projects across 14
-                countries to help you identify the highest quality projects.
-                Here, you'll find projects with credits currently available for
-                purchase. Each project is carefully vetted by Pachama's
-                technology and forest scientists to make sure your investment
-                reduces carbon, protects wildlife and supports local
-                communities.
-              </Typography>
+              {forestChecked ? (
+                <div>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "#fff", marginTop: "4vh", fontWeight: "bold" }}
+                  >
+                    WHY WE LOVE THIS PROJECT?
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#fff" }}>
+                    Pachama has evaluated over 150 forest carbon projects across
+                    14 countries to help you identify the highest quality
+                    projects. Here, you'll find projects with credits currently
+                    available for purchase. Each project is carefully vetted by
+                    Pachama's technology and forest scientists to make sure your
+                    investment reduces carbon, protects wildlife and supports
+                    local communities.
+                  </Typography>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
