@@ -69,7 +69,7 @@ export default function ProjectView() {
         });
       });
     }
-  });
+  }, []);
 
   return (
     <div style={styles.root}>
