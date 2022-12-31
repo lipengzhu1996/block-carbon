@@ -38,7 +38,7 @@ const styles = {
   },
 };
 
-export default function Project() {
+export default function ProjectView() {
   const [forestChecked, setForestChecked] = useState(true);
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
@@ -69,7 +69,7 @@ export default function Project() {
         });
       });
     }
-  });
+  }, []);
 
   return (
     <div style={styles.root}>
@@ -80,7 +80,6 @@ export default function Project() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    defaultChecked
                     checked={forestChecked}
                     onChange={(event, checked) => {
                       setForestChecked(checked);
@@ -121,8 +120,8 @@ export default function Project() {
           </div>
         </div>
         <div style={{ width: "20%", margin: "1vw" }}>
-          <div className="card-wrapper">
-            <div className="scrollable-wrapper">
+          <div className="view-card-wrapper">
+            <div className="view-scrollable-wrapper">
               <Typography variant="body2" sx={{ color: "#34eb92" }}>
                 Indonesia
               </Typography>

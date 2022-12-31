@@ -36,7 +36,7 @@ const styles = {
   },
 };
 
-export default function Projects() {
+export default function ProjectList() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (mapContainerRef.current != null) {
@@ -70,8 +70,8 @@ export default function Projects() {
   });
   return (
     <div style={styles.root}>
-      <div className="list-wrapper">
-        <div className="scrollable-wrapper">
+      <div className="list-card-wrapper">
+        <div className="list-scrollable-wrapper">
           <Typography variant="h2" sx={styles.title}>
             Projects
           </Typography>
@@ -93,7 +93,7 @@ export default function Projects() {
               description={"Improved Forest Management"}
               area={"514 hectares"}
               id={"VM0012"}
-              href={"./project"}
+              href={"./project/1"}
             />
           </div>
           <div id="project-2">
@@ -106,7 +106,7 @@ export default function Projects() {
               description={"REDD"}
               area={"5142 hectares"}
               id={"VM0012"}
-              href={"./project"}
+              href={"./project/2"}
             />
           </div>
         </div>

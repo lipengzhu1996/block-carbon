@@ -61,10 +61,7 @@ export default function CarbonOwnerDashboard() {
           variant="contained"
           size="large"
           sx={{ width: "10vw", margin: "10px" }}
-          onClick={() => {
-            setProjectShownInDialog("");
-            setOpenProjectDialog(true);
-          }}
+          href={"/dashboard/create"}
         >
           Create
         </Button>
