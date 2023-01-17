@@ -174,98 +174,92 @@ export default function ProjectCreate() {
                   Total area: {area} square meters
                 </Typography>
               </div>
-              {stepOneFinished ? (
-                <div style={{ marginTop: "30px" }}>
-                  <div className="text-icon-align">
-                    <Typography
-                      variant="h6"
-                      sx={{ color: stepTwoFinished ? "#34eb92" : "#fff" }}
-                    >
-                      Step2: Provide project information
-                    </Typography>
-                    {stepTwoFinished ? (
-                      <CheckIcon sx={{ color: "#34eb92" }} />
-                    ) : null}
-                  </div>
-                  <div className="stack">
-                    <CustomizedTextField
-                      required
-                      id="outlined-required"
-                      label="Title"
-                      autoComplete="off"
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                    />
-                    <CustomizedTextField
-                      required
-                      id="outlined-required2"
-                      label="Description"
-                      autoComplete="off"
-                      value={description}
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                    />
-                    <CustomizedTextField
-                      required
-                      id="outlined-required3"
-                      label="Type"
-                      autoComplete="off"
-                      value={type}
-                      onChange={(e) => {
-                        setType(e.target.value);
-                      }}
-                    />
-                    <CustomizedTextField
-                      required
-                      id="outlined-required4"
-                      label="Country"
-                      autoComplete="off"
-                      value={country}
-                      onChange={(e) => {
-                        setCountry(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-              ) : null}
-              {stepTwoFinished ? (
-                <div style={{ marginTop: "30px" }}>
-                  <div className="text-icon-align">
-                    <Typography
-                      variant="h6"
-                      sx={{ color: stepThreeFinished ? "#34eb92" : "#fff" }}
-                    >
-                      Step3: Upload files
-                    </Typography>
-                    {stepThreeFinished ? (
-                      <CheckIcon sx={{ color: "#34eb92" }} />
-                    ) : null}
-                  </div>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    sx={{ marginTop: "20px" }}
-                    onClick={() => {
-                      setStepThreeFinished(true);
-                    }}
+              <div style={{ marginTop: "30px" }}>
+                <div className="text-icon-align">
+                  <Typography
+                    variant="h6"
+                    sx={{ color: stepTwoFinished ? "#34eb92" : "#fff" }}
                   >
-                    Upload
-                  </Button>
+                    Step2: Provide project information
+                  </Typography>
+                  {stepTwoFinished ? (
+                    <CheckIcon sx={{ color: "#34eb92" }} />
+                  ) : null}
                 </div>
-              ) : null}
-              {stepThreeFinished ? (
+                <div className="stack">
+                  <CustomizedTextField
+                    required
+                    id="outlined-required"
+                    label="Title"
+                    autoComplete="off"
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                  />
+                  <CustomizedTextField
+                    required
+                    id="outlined-required2"
+                    label="Description"
+                    autoComplete="off"
+                    value={description}
+                    onChange={(e) => {
+                      setDescription(e.target.value);
+                    }}
+                  />
+                  <CustomizedTextField
+                    required
+                    id="outlined-required3"
+                    label="Type"
+                    autoComplete="off"
+                    value={type}
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
+                  />
+                  <CustomizedTextField
+                    required
+                    id="outlined-required4"
+                    label="Country"
+                    autoComplete="off"
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div style={{ marginTop: "30px" }}>
+                <div className="text-icon-align">
+                  <Typography
+                    variant="h6"
+                    sx={{ color: stepThreeFinished ? "#34eb92" : "#fff" }}
+                  >
+                    Step3: Upload files
+                  </Typography>
+                  {stepThreeFinished ? (
+                    <CheckIcon sx={{ color: "#34eb92" }} />
+                  ) : null}
+                </div>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   size="large"
-                  sx={{ marginTop: "40px", width: "20vw" }}
-                  onClick={() => {}}
+                  sx={{ marginTop: "20px" }}
+                  onClick={() => {
+                    setStepThreeFinished(true);
+                  }}
                 >
-                  Create
+                  Upload
                 </Button>
-              ) : null}
+              </div>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{ marginTop: "40px", width: "20vw" }}
+                onClick={() => {}}
+              >
+                Create
+              </Button>
             </div>
           </div>
         </div>
