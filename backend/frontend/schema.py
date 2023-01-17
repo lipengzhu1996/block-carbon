@@ -1,10 +1,17 @@
 import graphene
+import graphql_geojson
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
 from django.contrib.auth import get_user_model
 from graphql_auth import mutations
 
 from frontend.models import Project
+
+
+class ProjectsType(DjangoObjectType):
+    class Meta:
+        model = Project
+        fields = (["id", "title"])
 
 
 class ProjectType(DjangoObjectType):
@@ -18,14 +25,16 @@ class UserType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    projects = graphene.List(ProjectType, id=graphene.Int())
+    projects = graphene.List(ProjectsType)
+    project = graphene.Field(
+        ProjectType, id=graphene.String())
     user = graphene.Field(UserType)
 
-    def resolve_projects(self, info, id=None):
-        user = info.context.user
-        if id:
-            return Project.objects.filter(id=id)
+    def resolve_projects(self, info):
         return Project.objects.all()
+
+    def resolve_project(self, info, id):
+        return Project.objects.get(id=id)
 
     @login_required
     def resolve_user(self, info):

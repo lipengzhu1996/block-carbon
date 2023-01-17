@@ -1,12 +1,13 @@
 import { useRef, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import { LngLatLike, Map, Marker, NavigationControl } from "maplibre-gl";
 import ReactDOM from "react-dom";
-
-import "./styles.css";
-
 import ProjectPreviewCard from "../../components/Card/ProjectPreviewCard";
 import DropletMarker from "../../components/DropletMarker";
+
+import { gql } from "../../__generated__/gql";
+import "./styles.css";
 
 const styles = {
   root: {
@@ -36,8 +37,20 @@ const styles = {
   },
 };
 
+const PROJECTS_QUERY = gql(`
+  query Projects {
+    projects {
+      id
+      title
+    }
+  }
+`);
+
 export default function ProjectList() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const { data } = useQuery(PROJECTS_QUERY);
+  const projects = data?.projects;
+
   useEffect(() => {
     if (mapContainerRef.current != null) {
       const map = new Map({
@@ -83,32 +96,21 @@ export default function ProjectList() {
             scientists to make sure your investment reduces carbon, protects
             wildlife and supports local communities.
           </Typography>
-          <div id="project-1">
-            <ProjectPreviewCard
-              img={
-                "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f"
-              }
-              country={"United States"}
-              location={"King Country Park"}
-              description={"Improved Forest Management"}
-              area={"514 hectares"}
-              id={"VM0012"}
-              href={"./project/1"}
-            />
-          </div>
-          <div id="project-2">
-            <ProjectPreviewCard
-              img={
-                "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1"
-              }
-              country={"Indonesia"}
-              location={"Central Peatlands"}
-              description={"REDD"}
-              area={"5142 hectares"}
-              id={"VM0012"}
-              href={"./project/2"}
-            />
-          </div>
+          {projects?.map((project) => (
+            <div key={project?.id}>
+              <ProjectPreviewCard
+                img={
+                  "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1"
+                }
+                location={project?.title ?? ""}
+                country={"Indonesia"}
+                description={"REDD"}
+                area={"5142 hectares"}
+                id={"VM0012"}
+                href={"./project/" + project?.id}
+              />
+            </div>
+          ))}
         </div>
       </div>
       <div ref={mapContainerRef} style={styles.mapWrapper} />

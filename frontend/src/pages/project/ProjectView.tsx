@@ -1,9 +1,13 @@
 import { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Map, NavigationControl } from "maplibre-gl";
+
+import { gql } from "../../__generated__/gql";
 import "./styles.css";
 
 const styles = {
@@ -38,8 +42,33 @@ const styles = {
   },
 };
 
+const PROJECT_QUERY = gql(`
+  query Project($id: String!) {
+    project(id: $id) {
+      id
+      title
+      description
+      startTime
+      createTime
+      polygon {
+        type
+        coordinates
+      }
+    }
+  }
+`);
+
 export default function ProjectView() {
   const [forestChecked, setForestChecked] = useState(true);
+  const { id } = useParams();
+  if (id == null) {
+    throw new Error("id should not be null!");
+  }
+  const { data } = useQuery(PROJECT_QUERY, {
+    variables: { id },
+  });
+  const project = data?.project;
+
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -126,7 +155,7 @@ export default function ProjectView() {
                 Indonesia
               </Typography>
               <Typography variant="h4" sx={{ color: "#fff" }}>
-                Mountain Peak Ave
+                {project?.title}
               </Typography>
               <Typography variant="body2" sx={{ color: "#fff" }}>
                 REDD
@@ -140,13 +169,7 @@ export default function ProjectView() {
                     WHY WE LOVE THIS PROJECT?
                   </Typography>
                   <Typography variant="body2" sx={{ color: "#fff" }}>
-                    Pachama has evaluated over 150 forest carbon projects across
-                    14 countries to help you identify the highest quality
-                    projects. Here, you'll find projects with credits currently
-                    available for purchase. Each project is carefully vetted by
-                    Pachama's technology and forest scientists to make sure your
-                    investment reduces carbon, protects wildlife and supports
-                    local communities.
+                    {project?.description}
                   </Typography>
                 </div>
               ) : null}

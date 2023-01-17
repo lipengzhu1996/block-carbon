@@ -64,7 +64,7 @@ export default function Navigation() {
                 </Link>
               </Grid>
               <Grid item xs="auto">
-                <Link href="/project">
+                <Link href="/projects">
                   <Typography color="#ffffff" component="p" variant="body2">
                     Projects
                   </Typography>
