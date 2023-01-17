@@ -39,7 +39,7 @@ export default function App() {
           <Route path="/home" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/project" element={<ProjectList />} />
+          <Route path="/projects" element={<ProjectList />} />
           <Route path="/project/:id" element={<ProjectView />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="" element={<Dashboard />} />
