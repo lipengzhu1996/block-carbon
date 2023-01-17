@@ -10,3 +10,7 @@
 ## Backend: Django
 
 - django-graphql-jwt, django-graphql-auth: JWT authentication
+
+## Database: PostgreSQL with extension Postgis
+
+- django-graphql-geojson, GDAL, psycopg2-binary: Postgis supports in Django
