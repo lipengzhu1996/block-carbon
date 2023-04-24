@@ -56,7 +56,7 @@ export default function ProjectList() {
       const map = new Map({
         container: mapContainerRef.current,
         style:
-          "https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
+          "https://api.maptiler.com/maps/hybrid/style.json?key=hXf8MjGjf0lT2pverypj",
         zoom: 9,
         center: [137.9150899566626, 36.25956997955441],
       });

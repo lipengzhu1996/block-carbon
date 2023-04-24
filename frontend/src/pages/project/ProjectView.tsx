@@ -72,33 +72,39 @@ export default function ProjectView() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mapContainerRef.current != null) {
+    if (project != null && mapContainerRef.current != null) {
       const map = new Map({
         container: mapContainerRef.current,
         style:
-          "https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
+          "https://api.maptiler.com/maps/hybrid/style.json?key=hXf8MjGjf0lT2pverypj",
         zoom: 11,
-        center: [-43.206091, -22.920387],
+        center: [140.32271309522912, 35.992799688444215],
       });
       map.addControl(new NavigationControl({}));
       map.on("load", function () {
-        map.addSource("rio_cats", {
+        map.addSource("maine", {
           type: "geojson",
-          data: `https://docs.maptiler.com/maplibre-gl-js/geojson-polygon/rio_cats.geojson`,
+          data: {
+            type: "Feature",
+            geometry: {
+              type: "Polygon",
+              coordinates: project?.polygon.coordinates,
+            },
+          },
         });
         map.addLayer({
-          id: "rio_cats",
+          id: "maine",
           type: "fill",
-          source: "rio_cats",
+          source: "maine",
           layout: {},
           paint: {
-            "fill-color": "#98b",
+            "fill-color": "#088",
             "fill-opacity": 0.8,
           },
         });
       });
     }
-  }, []);
+  }, [project]);
 
   return (
     <div style={styles.root}>
