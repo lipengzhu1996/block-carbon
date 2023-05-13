@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Slider from "@mui/material/Slider";
+
 import { Map, NavigationControl } from "maplibre-gl";
 
 import { gql } from "../../__generated__/gql";
@@ -59,6 +61,7 @@ const PROJECT_QUERY = gql(`
 `);
 
 export default function ProjectView() {
+  const [year, setYear] = useState(2009);
   const [forestChecked, setForestChecked] = useState(true);
   const { id } = useParams();
   if (id == null) {
@@ -152,6 +155,24 @@ export default function ProjectView() {
                 }
               />
             </FormGroup>
+          </div>
+          <div className="timeline">
+            <Slider
+              aria-label="Timeline"
+              value={year}
+              onChange={(_, value) => {
+                setYear(value as number);
+              }}
+              onChangeCommitted={(_, value) => {
+                //TODO: send the query
+              }}
+              defaultValue={2009}
+              valueLabelDisplay="auto"
+              step={1}
+              marks
+              min={2009}
+              max={2020}
+            />
           </div>
         </div>
         <div style={{ width: "20%", margin: "1vw" }}>
