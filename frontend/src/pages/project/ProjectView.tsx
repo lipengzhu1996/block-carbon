@@ -6,22 +6,32 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 
 import { Map, NavigationControl } from "maplibre-gl";
 
 import { gql } from "../../__generated__/gql";
 import "./styles.css";
+import ProjectViewTabPanel from "../../components/Card/ProjectViewTabPanel";
 
 const styles = {
   root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  } as React.CSSProperties,
+  mapCardRoot: {
     width: "100%",
     height: "90vh",
     overflow: "hidden",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  cardWrapper: {
+    flexDirection: "column",
+  } as React.CSSProperties,
+  mapCardWrapper: {
     width: "95%",
     height: "95%",
     borderRadius: "25px",
@@ -41,6 +51,9 @@ const styles = {
     text: {
       color: "#fff",
     },
+  },
+  tabWrapper: {
+    width: "75%",
   },
 };
 
@@ -63,6 +76,8 @@ const PROJECT_QUERY = gql(`
 export default function ProjectView() {
   const [year, setYear] = useState(2009);
   const [forestChecked, setForestChecked] = useState(true);
+  const [panelSelected, setPanelSelected] = useState(0);
+
   const { id } = useParams();
   if (id == null) {
     throw new Error("id should not be null!");
@@ -111,98 +126,142 @@ export default function ProjectView() {
 
   return (
     <div style={styles.root}>
-      <div style={styles.cardWrapper}>
-        <div ref={mapContainerRef} style={styles.mapWrapper}>
-          <div className="infobox">
-            <FormGroup sx={{ margin: "3vh" }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={forestChecked}
-                    onChange={(event, checked) => {
-                      setForestChecked(checked);
-                    }}
-                  />
-                }
-                label={
-                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
-                    Forest
-                  </Typography>
-                }
+      <div style={styles.mapCardRoot}>
+        <div style={styles.mapCardWrapper}>
+          <div ref={mapContainerRef} style={styles.mapWrapper}>
+            <div className="infobox">
+              <FormGroup sx={{ margin: "3vh" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={forestChecked}
+                      onChange={(event, checked) => {
+                        setForestChecked(checked);
+                      }}
+                    />
+                  }
+                  label={
+                    <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                      Forest
+                    </Typography>
+                  }
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={
+                    <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                      Time Series
+                    </Typography>
+                  }
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={
+                    <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                      Carbon
+                    </Typography>
+                  }
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={
+                    <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                      Age
+                    </Typography>
+                  }
+                />
+              </FormGroup>
+            </div>
+            <div className="timeline">
+              <Slider
+                aria-label="Timeline"
+                value={year}
+                onChange={(_, value) => {
+                  setYear(value as number);
+                }}
+                onChangeCommitted={(_, value) => {
+                  //TODO: send the query
+                }}
+                defaultValue={2009}
+                valueLabelDisplay="on"
+                step={1}
+                marks
+                min={2009}
+                max={2020}
               />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
-                    Time Series
-                  </Typography>
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
-                    Carbon
-                  </Typography>
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Typography variant="body2" sx={{ color: "#ffffff" }}>
-                    Age
-                  </Typography>
-                }
-              />
-            </FormGroup>
+            </div>
           </div>
-          <div className="timeline">
-            <Slider
-              aria-label="Timeline"
-              value={year}
-              onChange={(_, value) => {
-                setYear(value as number);
-              }}
-              onChangeCommitted={(_, value) => {
-                //TODO: send the query
-              }}
-              defaultValue={2009}
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={2009}
-              max={2020}
-            />
-          </div>
-        </div>
-        <div style={{ width: "20%", margin: "1vw" }}>
-          <div className="view-card-wrapper">
-            <div className="view-scrollable-wrapper">
-              <Typography variant="body2" sx={{ color: "#34eb92" }}>
-                Indonesia
-              </Typography>
-              <Typography variant="h4" sx={{ color: "#fff" }}>
-                {project?.title}
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#fff" }}>
-                REDD
-              </Typography>
-              {forestChecked ? (
-                <div>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#fff", marginTop: "4vh", fontWeight: "bold" }}
-                  >
-                    WHY WE LOVE THIS PROJECT?
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#fff" }}>
-                    {project?.description}
-                  </Typography>
-                </div>
-              ) : null}
+          <div style={{ width: "20%", margin: "1vw" }}>
+            <div className="view-card-wrapper">
+              <div className="view-scrollable-wrapper">
+                <Typography variant="body2" sx={{ color: "#34eb92" }}>
+                  Indonesia
+                </Typography>
+                <Typography variant="h4" sx={{ color: "#fff" }}>
+                  {project?.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#fff" }}>
+                  REDD
+                </Typography>
+                {forestChecked ? (
+                  <div>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#fff",
+                        marginTop: "4vh",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      WHY WE LOVE THIS PROJECT?
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: "#fff" }}>
+                      {project?.description}
+                    </Typography>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div style={styles.tabWrapper}>
+        <Tabs
+          value={panelSelected}
+          onChange={(_, value) => {
+            setPanelSelected(value);
+          }}
+          centered
+          aria-label="panels"
+        >
+          <Tab label="Overview" style={{ minWidth: "25%" }} />
+          <Tab label="Info" style={{ minWidth: "25%" }} />
+          <Tab label="Images" style={{ minWidth: "25%" }} />
+          <Tab label="Database" style={{ minWidth: "25%" }} />
+        </Tabs>
+        <ProjectViewTabPanel value={panelSelected} index={0}>
+          <div>
+            <Typography variant="body2" sx={{ color: "#34eb92" }}>
+              Indonesia
+            </Typography>
+            <Typography variant="h4" sx={{ color: "#fff" }}>
+              {project?.title}
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#fff" }}>
+              REDD
+            </Typography>
+          </div>
+        </ProjectViewTabPanel>
+        <ProjectViewTabPanel value={panelSelected} index={1}>
+          <div>Item Two</div>
+        </ProjectViewTabPanel>
+        <ProjectViewTabPanel value={panelSelected} index={2}>
+          <div>Item Three</div>
+        </ProjectViewTabPanel>
+        <ProjectViewTabPanel value={panelSelected} index={3}>
+          <div>Item Four</div>
+        </ProjectViewTabPanel>
       </div>
     </div>
   );
