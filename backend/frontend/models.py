@@ -1,6 +1,8 @@
-from django.contrib.gis.db import models
+# from django.contrib.gis.db import models
+from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import datetime
+from jsonfield import JSONField
 import uuid
 
 ID_LENGTH = 12
@@ -21,5 +23,6 @@ class Project(models.Model):
 
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=20000)
-    start_time = models.DateTimeField(default=None)
-    polygon = models.PolygonField(default=None)
+    tif_links = JSONField(default=None)
+    # start_time = models.DateTimeField(default=None)
+    # polygon = models.PolygonField(default=None)

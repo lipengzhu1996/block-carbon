@@ -9,11 +9,14 @@ import Slider from "@mui/material/Slider";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
-import { Map, NavigationControl } from "maplibre-gl";
+import mapboxgl from "mapbox-gl";
 
 import { gql } from "../../__generated__/gql";
 import "./styles.css";
 import ProjectViewTabPanel from "../../components/Card/ProjectViewTabPanel";
+
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiYmxvY2tjYXJib24iLCJhIjoiY2xiYnE3OHdzMGtjcjNwbG01ang4amZhNiJ9.us2VY_MsxGc2N8VaO2kYPQ";
 
 const styles = {
   root: {
@@ -63,12 +66,7 @@ const PROJECT_QUERY = gql(`
       id
       title
       description
-      startTime
-      createTime
-      polygon {
-        type
-        coordinates
-      }
+      tifLinks
     }
   }
 `);
@@ -77,6 +75,7 @@ export default function ProjectView() {
   const [year, setYear] = useState(2009);
   const [forestChecked, setForestChecked] = useState(true);
   const [panelSelected, setPanelSelected] = useState(0);
+  const mapContainer = useRef(null);
 
   const { id } = useParams();
   if (id == null) {
@@ -86,49 +85,46 @@ export default function ProjectView() {
     variables: { id },
   });
   const project = data?.project;
+  if (project == null) {
+    throw new Error("project should be loaded!");
+  }
+  const { title, description, tifLinks } = project;
 
-  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const tifLinksObj = JSON.parse(tifLinks.replaceAll("'", '"'));
 
   useEffect(() => {
-    if (project != null && mapContainerRef.current != null) {
-      const map = new Map({
-        container: mapContainerRef.current,
-        style:
-          "https://api.maptiler.com/maps/hybrid/style.json?key=hXf8MjGjf0lT2pverypj",
+    if (mapContainer.current != null) {
+      const map = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/streets-v12",
+        center: [-67.588, -14.294],
         zoom: 11,
-        center: [140.32271309522912, 35.992799688444215],
       });
-      map.addControl(new NavigationControl({}));
-      map.on("load", function () {
-        map.addSource("maine", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            geometry: {
-              type: "Polygon",
-              coordinates: project?.polygon.coordinates,
-            },
-          },
+
+      map.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+      map.on("load", () => {
+        map.addSource("portland", {
+          type: "raster",
+          url: "mapbox://blockcarbon.8ccsmaef",
         });
+
         map.addLayer({
-          id: "maine",
-          type: "fill",
-          source: "maine",
-          layout: {},
-          paint: {
-            "fill-color": "#088",
-            "fill-opacity": 0.8,
-          },
+          id: "portland",
+          source: "portland",
+          type: "raster",
         });
       });
+
+      return () => map.remove();
     }
-  }, [project]);
+  }, []);
 
   return (
     <div style={styles.root}>
       <div style={styles.mapCardRoot}>
         <div style={styles.mapCardWrapper}>
-          <div ref={mapContainerRef} style={styles.mapWrapper}>
+          <div ref={mapContainer} style={styles.mapWrapper}>
             <div className="infobox">
               <FormGroup sx={{ margin: "3vh" }}>
                 <FormControlLabel
@@ -198,7 +194,7 @@ export default function ProjectView() {
                   Indonesia
                 </Typography>
                 <Typography variant="h4" sx={{ color: "#fff" }}>
-                  {project?.title}
+                  {title}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#fff" }}>
                   REDD
@@ -216,7 +212,7 @@ export default function ProjectView() {
                       WHY WE LOVE THIS PROJECT?
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#fff" }}>
-                      {project?.description}
+                      {description}
                     </Typography>
                   </div>
                 ) : null}
@@ -246,7 +242,7 @@ export default function ProjectView() {
               Indonesia
             </Typography>
             <Typography variant="h4" sx={{ color: "#fff" }}>
-              {project?.title}
+              {title}
             </Typography>
             <Typography variant="body2" sx={{ color: "#fff" }}>
               REDD
