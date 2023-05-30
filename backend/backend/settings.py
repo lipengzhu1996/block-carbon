@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
+    # 'django.contrib.gis',
     'frontend',
     'graphene_django',
     'corsheaders',
@@ -100,8 +100,8 @@ DATABASES = {
 #     }
 # }
 
-GDAL_LIBRARY_PATH = "/usr/local/lib/libgdal.dylib"
-PROJ_LIBRARY_PATH = "/usr/local/lib/libproj.dylib"
+# GDAL_LIBRARY_PATH = "/usr/local/lib/libgdal.dylib"
+# PROJ_LIBRARY_PATH = "/usr/local/lib/libproj.dylib"
 
 
 # GraphQL Schema
