@@ -57,7 +57,7 @@ export default function Navigation() {
           <Box sx={styles.appbarBox}>
             <Grid container spacing={4}>
               <Grid item xs="auto">
-                <Link href="#">
+                <Link href="/projects">
                   <Typography color="#ffffff" component="p" variant="body2">
                     Insights
                   </Typography>

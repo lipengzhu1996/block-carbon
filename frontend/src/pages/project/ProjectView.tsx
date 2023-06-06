@@ -85,18 +85,18 @@ export default function ProjectView() {
     variables: { id },
   });
   const project = data?.project;
-  if (project == null) {
-    throw new Error("project should be loaded!");
-  }
-  const { title, description, tifLinks } = project;
 
-  const tifLinksObj = JSON.parse(tifLinks.replaceAll("'", '"'));
+  // const { title, description, tifLinks } = project;
+  const title = "asd";
+  const description = "test";
+
+  // const tifLinksObj = JSON.parse(tifLinks.replaceAll("'", '"'));
 
   useEffect(() => {
     if (mapContainer.current != null) {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v12",
+        style: "mapbox://styles/mapbox/satellite-v9",
         center: [-67.588, -14.294],
         zoom: 11,
       });
