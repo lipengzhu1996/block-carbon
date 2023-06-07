@@ -106,7 +106,7 @@ export default function ProjectView() {
       map.on("load", () => {
         map.addSource("portland", {
           type: "raster",
-          url: "mapbox://blockcarbon.8ccsmaef",
+          url: "mapbox://blockcarbon.6l3ausdg",
         });
 
         map.addLayer({
