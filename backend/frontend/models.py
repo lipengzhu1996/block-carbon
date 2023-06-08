@@ -22,7 +22,15 @@ class Project(models.Model):
                           primary_key=True, default=id_gen, editable=False)
 
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=20000)
-    tif_links = JSONField(default=None)
+    overview = models.CharField(default=None, max_length=20000)
+    registry = models.CharField(default=None, max_length=20000)
+    accuracy_evaluation = models.CharField(default=None, max_length=20000)
+    additionality_evaluation = models.CharField(default=None, max_length=20000)
+    permanence_evaluation = models.CharField(default=None, max_length=20000)
+    leakage_evaluation = models.CharField(default=None, max_length=20000)
+    cobenefit_evaluation = models.CharField(default=None, max_length=20000)
+    story = models.CharField(default=None, max_length=20000)
+
+    tilesets = JSONField(default=None)
     # start_time = models.DateTimeField(default=None)
     # polygon = models.PolygonField(default=None)

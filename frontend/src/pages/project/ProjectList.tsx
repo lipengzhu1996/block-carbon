@@ -103,10 +103,10 @@ export default function ProjectList() {
                   "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1"
                 }
                 location={project?.title ?? ""}
-                country={"Indonesia"}
-                description={"REDD"}
-                area={"5142 hectares"}
-                id={"VM0012"}
+                country={""}
+                description={""}
+                area={""}
+                id={""}
                 href={"./project/" + project?.id}
               />
             </div>
