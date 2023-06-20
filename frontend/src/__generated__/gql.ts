@@ -13,12 +13,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n    query PaymentIntent($id: String!) {\n        paymentIntent(id: $id) \n    }\n": types.PaymentIntentDocument,
     "\n  mutation Login ($password: String!, $email: String, $username: String) {\n    tokenAuth(password: $password, email: $email, username: $username) {\n      token\n      errors\n      success\n    }\n  }\n": types.LoginDocument,
     "\n  query Projects {\n    projects {\n      id\n      title\n    }\n  }\n": types.ProjectsDocument,
     "\n  query Project($id: String!) {\n    project(id: $id) {\n      id\n      title\n      overview\n      registry\n      accuracyEvaluation\n      additionalityEvaluation\n      permanenceEvaluation\n      tilesets\n      story\n    }\n  }\n": types.ProjectDocument,
     "\n  mutation Register($email: String!, $username: String!, $password1: String!, $password2: String!) {\n    register(email: $email, username: $username, password1: $password1, password2: $password2) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n": types.RegisterDocument,
 };
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query PaymentIntent($id: String!) {\n        paymentIntent(id: $id) \n    }\n"): (typeof documents)["\n    query PaymentIntent($id: String!) {\n        paymentIntent(id: $id) \n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

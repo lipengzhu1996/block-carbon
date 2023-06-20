@@ -4,8 +4,23 @@ from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
 from django.contrib.auth import get_user_model
 from graphql_auth import mutations
+import stripe
+import logging
+
 
 from frontend.models import Project
+
+logger = logging.getLogger('django')
+# logger.info('here goes your message')
+
+stripe.api_key = "sk_test_51NJq0TIMKbmsdl3YvIYGnOozMAhMHnhPx8GOG5gMYMQ9P2hQGIL7jfYLR7ms28ABeqJKZuhCAP6uTMDfARrKl2I300U4ZzAwVO"
+
+
+def calculate_order_amount(id):
+    # Replace this constant with a calculation of the order's amount
+    # Calculate the order total on the server to prevent
+    # people from directly manipulating the amount on the client
+    return 100
 
 
 class ProjectsType(DjangoObjectType):
@@ -29,12 +44,28 @@ class Query(graphene.ObjectType):
     project = graphene.Field(
         ProjectType, id=graphene.String())
     user = graphene.Field(UserType)
+    payment_intent = graphene.String(id=graphene.String())
 
     def resolve_projects(self, info):
         return Project.objects.all()
 
     def resolve_project(self, info, id):
         return Project.objects.get(id=id)
+
+    @login_required
+    def resolve_payment_intent(self, info, id):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception("Login Required")
+        intent = stripe.PaymentIntent.create(
+            amount=calculate_order_amount(id=id),
+            currency='usd',
+            automatic_payment_methods={
+                'enabled': True,
+            },
+        )
+
+        return intent['client_secret']
 
     @login_required
     def resolve_user(self, info):

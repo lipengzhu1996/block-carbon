@@ -8,12 +8,14 @@ import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
+import Button from "@mui/material/Button";
 
 import mapboxgl from "mapbox-gl";
 
 import { gql } from "../../__generated__/gql";
 import "./styles.css";
 import ProjectViewTabPanel from "../../components/Card/ProjectViewTabPanel";
+import PaymentIntentDialog from "../../components/Dialog/PaymentIntentDialog";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYmxvY2tjYXJib24iLCJhIjoiY2xiYnE3OHdzMGtjcjNwbG01ang4amZhNiJ9.us2VY_MsxGc2N8VaO2kYPQ";
@@ -102,6 +104,8 @@ export default function ProjectView() {
 
   const [project, setProject] = useState<Project>();
   const [panelSelected, setPanelSelected] = useState(0);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+
   const mapContainer = useRef(null);
 
   const { id } = useParams();
@@ -148,7 +152,7 @@ export default function ProjectView() {
       }
     }
   }, [data, year]);
-
+  console.log(showPaymentDialog);
   return (
     <div style={styles.root}>
       <div style={styles.mapCardRoot}>
@@ -236,6 +240,16 @@ export default function ProjectView() {
                   <Typography variant="body2" sx={{ color: "#fff" }}>
                     {project?.story}
                   </Typography>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{ width: "40%", marginTop: "10px" }}
+                    onClick={() => {
+                      setShowPaymentDialog(true);
+                    }}
+                  >
+                    Buy now
+                  </Button>
                 </div>
               </div>
             </div>
@@ -293,6 +307,15 @@ export default function ProjectView() {
           <div>Item Four</div>
         </ProjectViewTabPanel>
       </div>
+      {showPaymentDialog && project != null ? (
+        <PaymentIntentDialog
+          id={project?.id}
+          open={showPaymentDialog}
+          onClose={() => {
+            setShowPaymentDialog(false);
+          }}
+        />
+      ) : null}
     </div>
   );
 }
