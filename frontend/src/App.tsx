@@ -2,7 +2,6 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./assets/theme";
-import background from "./assets/images/homepage-background.jpg";
 
 import useUser from "./hooks/useUser";
 
@@ -27,10 +26,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div
         style={{
-          backgroundImage: `url(${background})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          width: "100%",
+          backgroundColor: "black",
         }}
       >
         <CssBaseline />

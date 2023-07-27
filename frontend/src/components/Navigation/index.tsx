@@ -1,94 +1,100 @@
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import useUser from "../../hooks/useUser";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
-const styles = {
-  appbar: {
-    background: "none",
+import useUser from "../../hooks/useUser";
+import logo from "../../assets/images/logo-black.png";
+import "./styles.css";
+
+const BuyCreditsButton = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  color: "#FFFFFF",
+  fontFamily: "Inter",
+  fontWeight: "bold",
+  borderRadius: "100px",
+  background: "#000000",
+  "&:hover": {
+    backgroundColor: "#000000",
+    borderColor: "#000000",
+    boxShadow: "none",
   },
-  appbarWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "90%",
-    height: "10vh",
-    margin: "0 auto",
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#000000",
+    borderColor: "#000000",
   },
-  appbarTitle: {
-    flexGrow: "1",
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
   },
-  appbarBox: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginRight: "auto",
-  },
-  colorText: {
-    color: "#5AFF3D",
-  },
-  buttonText: {
-    fontFamily: "monospace",
-    fontWeight: 700,
-    letterSpacing: ".1rem",
-    color: "#ffffff",
-    textDecoration: "none",
-  },
-};
+});
+
+const LoginButton = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  color: "#FFFFFF",
+  fontFamily: "Inter",
+  fontWeight: "bold",
+  borderRadius: "100px",
+  background:
+    "var(--gradient-1, linear-gradient(128deg, #2A3BFB 0%, #8B36E8 100%))",
+});
 
 export default function Navigation() {
   const user = useUser();
 
   return (
-    <Container maxWidth="lg">
-      <Toolbar disableGutters sx={styles.appbarWrapper}>
-        <Typography
-          variant="h3"
-          noWrap
-          component="a"
-          href="/"
-          sx={styles.buttonText}
-        >
-          <span style={styles.colorText}>Block</span>Carbon
-        </Typography>
-        <Box>
-          <Box sx={styles.appbarBox}>
-            <Grid container spacing={4}>
-              <Grid item xs="auto">
-                <Link href="/projects">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Insights
-                  </Typography>
-                </Link>
-              </Grid>
-              <Grid item xs="auto">
-                <Link href="/projects">
-                  <Typography color="#ffffff" component="p" variant="body2">
-                    Projects
-                  </Typography>
-                </Link>
-              </Grid>
-              <Grid item xs="auto">
-                {user != null ? (
-                  <Link href="/dashboard">
-                    <Typography color="#ffffff" component="p" variant="body2">
-                      {user.username}
-                    </Typography>
-                  </Link>
-                ) : (
-                  <Link href="/login">
-                    <Typography color="#ffffff" component="p" variant="body2">
-                      Login
-                    </Typography>
-                  </Link>
-                )}
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Toolbar>
-    </Container>
+    <div className="container">
+      <div className="navbar">
+        <a href="/home">
+          <img src={`${logo}`} alt={"logo"} loading="lazy" className="logo" />
+        </a>
+        <div className="menu">
+          <div>
+            <Link href="/projects">
+              <Typography className="menu-text">How It Works</Typography>
+            </Link>
+          </div>
+          <div>
+            <Link href="/projects">
+              <Typography className="menu-text">Solutions</Typography>
+            </Link>
+          </div>
+          <div>
+            <Link href="/projects">
+              <Typography className="menu-text">Use Cases</Typography>
+            </Link>
+          </div>
+          <div>
+            <Link href="/projects">
+              <Typography className="menu-text">About Us</Typography>
+            </Link>
+          </div>
+          <div>
+            <Link href="/projects">
+              <Typography className="menu-text">Resources</Typography>
+            </Link>
+          </div>
+        </div>
+        <div className="button-menu">
+          <BuyCreditsButton variant="contained" disableRipple href="/login">
+            Buy Credits <ArrowOutwardIcon />
+          </BuyCreditsButton>
+          {user != null ? (
+            <LoginButton variant="contained" disableRipple href="/dashboard">
+              Account
+            </LoginButton>
+          ) : (
+            <LoginButton variant="contained" disableRipple href="/login">
+              Log In <ArrowOutwardIcon />
+            </LoginButton>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
