@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Inter&display=swap");
 
-.container {
+.navigation-container {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
 }
 
-.navbar {
+.navigation-navbar {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -15,29 +15,31 @@
   width: 90%;
 }
 
-.logo {
+.navigation-logo {
   display: flex;
   width: 200px;
   padding-right: 0px;
   align-items: center;
 }
 
-.menu {
+.navigation-menu {
   display: flex;
   height: 50px;
   align-items: center;
   gap: 40px;
+  min-width: 650px;
 }
 
-.menu-text {
+.navigation-menu-text {
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
   line-height: 120%;
 }
 
-.button-menu {
+.navigation-button-menu {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+  min-width: 250px;
 }

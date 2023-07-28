@@ -1,4 +1,3 @@
-import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -48,39 +47,44 @@ export default function Navigation() {
   const user = useUser();
 
   return (
-    <div className="container">
-      <div className="navbar">
+    <div className="navigation-container">
+      <div className="navigation-navbar">
         <a href="/home">
-          <img src={`${logo}`} alt={"logo"} loading="lazy" className="logo" />
+          <img
+            src={`${logo}`}
+            alt={"logo"}
+            loading="lazy"
+            className="navigation-logo"
+          />
         </a>
-        <div className="menu">
+        <div className="navigation-menu">
           <div>
             <Link href="/projects">
-              <Typography className="menu-text">How It Works</Typography>
+              <p className="navigation-menu-text">How It Works</p>
             </Link>
           </div>
           <div>
             <Link href="/projects">
-              <Typography className="menu-text">Solutions</Typography>
+              <p className="navigation-menu-text">Solutions</p>
             </Link>
           </div>
           <div>
             <Link href="/projects">
-              <Typography className="menu-text">Use Cases</Typography>
+              <p className="navigation-menu-text">Use Cases</p>
             </Link>
           </div>
           <div>
             <Link href="/projects">
-              <Typography className="menu-text">About Us</Typography>
+              <p className="navigation-menu-text">About Us</p>
             </Link>
           </div>
           <div>
             <Link href="/projects">
-              <Typography className="menu-text">Resources</Typography>
+              <p className="navigation-menu-text">Resources</p>
             </Link>
           </div>
         </div>
-        <div className="button-menu">
+        <div className="navigation-button-menu">
           <BuyCreditsButton variant="contained" disableRipple href="/login">
             Buy Credits <ArrowOutwardIcon />
           </BuyCreditsButton>
