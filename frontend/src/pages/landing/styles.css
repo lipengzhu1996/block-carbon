@@ -1,7 +1,29 @@
 @import url("https://fonts.googleapis.com/css?family=Inter&display=swap");
 
+.container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .landing-container {
   padding: 48px;
+  position: relative;
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: end;
+}
+
+.video {
+  max-height: 800px;
+  max-width: 800px;
 }
 
 .landing-frame1 {
