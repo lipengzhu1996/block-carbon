@@ -12,12 +12,14 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
+  padding-inline: 48px;
+  padding-top: 24px;
 }
 
 .navigation-logo {
   display: flex;
-  width: 200px;
+  width: 281px;
   padding-right: 0px;
   align-items: center;
 }

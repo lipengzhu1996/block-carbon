@@ -58,31 +58,38 @@ export default function Landing() {
             </p>
             <p className="landing-title-gradient-text">Climate Assets</p>
           </div>
-          <div className="landing-subtitle-container">
-            <p className="landing-subtitle-text">
-              <span className="landing-subtitle-text-bold">BlockCarbon</span> is
-              a technology-driven platform to support the development of
-              high-quality carbon credits and bridge them with the global
-              market.
-            </p>
-          </div>
         </div>
         <div className="landing-frame2">
           <ExploreButton>
             Explore More <ArrowOutwardIcon />
           </ExploreButton>
-          <div className="landing-frame2-source-container">
-            <p className="landing-frame2-source-text">
-              Source: Atmospheric Carbon Dioxide Tagged by Source
-            </p>
-            <p className="landing-frame2-source-text">
-              https://svs.gsfc.nasa.gov/5110
-            </p>
+          <div className="landing-frame2-description">
+            <div className="landing-frame2-description-container">
+              <p className="landing-frame2-description-text">
+                <span style={{ fontWeight: "700" }}>BlockCarbon</span> is a
+                technology-driven platform to support the development of
+                high-quality carbon credits and bridge them with the global
+                market.
+              </p>
+            </div>
+            <div className="landing-frame2-source-container">
+              <p className="landing-frame2-source-text">
+                Source: Atmospheric Carbon Dioxide Tagged by Source
+              </p>
+              <p className="landing-frame2-source-text">
+                https://svs.gsfc.nasa.gov/5110
+              </p>
+            </div>
           </div>
         </div>
         <div className="landing-frame3">
-          <p className="landing-subtitle-text">Trusted By</p>
-          <img src={`${trust}`} alt={"trust"} loading="lazy" />
+          <p className="landing-frame3-text">Trusted By</p>
+          <img
+            src={`${trust}`}
+            alt={"trust"}
+            loading="lazy"
+            className="landing-frame3-image"
+          />
         </div>
         <div className="landing-frame4">
           <div className="landing-frame4-text-container">
