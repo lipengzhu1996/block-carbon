@@ -5,6 +5,7 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import trust from "../../assets/images/trust.png";
 import diagram1 from "../../assets/images/Diagram 01.png";
 import diagram2 from "../../assets/images/Diagram 02.png";
+import solutions from "../../assets/images/solutions.png";
 
 import landing from "../../assets/videos/landing.webm";
 
@@ -91,6 +92,24 @@ export default function Landing() {
             className="landing-frame3-image"
           />
         </div>
+        {/* <div className="landing-frame7">
+          <section id="sect1">
+            <img
+              src={`${diagram1}`}
+              alt={"diagram"}
+              loading="lazy"
+              style={{ height: "100vh", padding: "20vh" }}
+            />
+          </section>
+          <section id="sect2">
+            <img
+              src={`${diagram2}`}
+              alt={"diagram"}
+              loading="lazy"
+              style={{ height: "100vh", padding: "20vh" }}
+            />
+          </section>
+        </div> */}
         <div className="landing-frame4">
           <div className="landing-frame4-text-container">
             <p className="landing-frame4-heading1-text">
@@ -253,6 +272,56 @@ export default function Landing() {
                   local credits or low-quality credits
                 </span>{" "}
                 (less traceable, hard to monitor, and ambiguous calculations)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="landing-frame8">
+          <p className="landing-frame8-heading-text">BlockCarbon Solutions</p>
+          <p className="landing-frame8-subtitle-text">
+            Use data and technology to create a new narrative for Asia’s
+            nature-based carbon credits projects
+          </p>
+          <img
+            src={`${solutions}`}
+            alt={"diagram"}
+            loading="lazy"
+            className="landing-frame8-image"
+          />
+          <div className="landing-frame8-cards-container">
+            <div className="landing-frame5-right-content-card-container">
+              <p className="landing-frame5-right-content-card-heading-text">
+                <span style={{ color: "#2A3BFB" }}>Predict</span> Carbon Storage
+                Capability
+              </p>
+              <p className="landing-frame5-right-content-card-text">
+                Selecting projects that generate sufficient credit
+              </p>
+            </div>
+            <div className="landing-frame5-right-content-card-container">
+              <p className="landing-frame5-right-content-card-heading-text">
+                <span style={{ color: "#ADF400" }}>Customized</span> Monitoring
+              </p>
+              <p className="landing-frame5-right-content-card-text">
+                Providing monitoring and management during the lifecycle
+              </p>
+            </div>
+            <div className="landing-frame5-right-content-card-container">
+              <p className="landing-frame5-right-content-card-heading-text">
+                Increase the <span style={{ color: "#00F4FE" }}>Liquidity</span>
+              </p>
+              <p className="landing-frame5-right-content-card-text">
+                Fully exploiting the price advantage of carbon credits in Asia
+              </p>
+            </div>
+            <div className="landing-frame5-right-content-card-container">
+              <p className="landing-frame5-right-content-card-heading-text">
+                Improve the <span style={{ color: "#8B36E8" }}>Quality</span> of
+                the Credits
+              </p>
+              <p className="landing-frame5-right-content-card-text">
+                Ensure all calculations are accurate and reliable, create a
+                unique narrative for each project
               </p>
             </div>
           </div>

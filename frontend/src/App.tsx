@@ -27,6 +27,7 @@ export default function App() {
       <div
         style={{
           backgroundColor: "black",
+          minWidth: "1400px",
         }}
       >
         <CssBaseline />
