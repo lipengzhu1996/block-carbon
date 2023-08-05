@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 import trust from "../../assets/images/trust.png";
 import diagram1 from "../../assets/images/Diagram 01.png";
 import diagram2 from "../../assets/images/Diagram 02.png";
 import solutions from "../../assets/images/solutions.png";
+import usecase1 from "../../assets/images/usecase1.png";
+import usecase2 from "../../assets/images/usecase2.png";
+import usecase3 from "../../assets/images/usecase3.png";
 
 import landing from "../../assets/videos/landing.webm";
 
@@ -23,9 +26,9 @@ const ExploreButton = styled(Button)({
   border: "1px solid",
   lineHeight: 1.5,
   background: "#000000",
-  borderColor: "#FFFFFF",
-  width: "285px",
-  height: "54px",
+  borderColor: "#000000",
+  width: "216px",
+  height: "42px",
   "&:hover": {
     backgroundColor: "#000000",
     borderColor: "#FFFFFF",
@@ -37,11 +40,93 @@ const ExploreButton = styled(Button)({
     borderColor: "#FFFFFF",
   },
   "&:focus": {
-    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    borderColor: "#FFFFFF",
   },
 });
 
 export default function Landing() {
+  const [selectedCard, setSelectedCard] = useState(1);
+  const [selectedTab, setSelectedTab] = useState(1);
+
+  const getSelectedTab = (selectedTab: number) => {
+    switch (selectedTab) {
+      case 1:
+      default:
+        return (
+          <div className="landing-frame9-content-container">
+            <div className="landing-frame9-content-text-container">
+              <p className="landing-frame9-title-text">
+                Identification and Verification of Mangrove in Bangladesh
+              </p>
+              <p className="landing-frame9-description-text">
+                Identification of 1200+ locations of mangrove-based sites in
+                Bangladesh. And for a given identified location, the time frame
+                of the plantings will be extrapolated by the AI algorithm. The
+                information will greatly help customer to determine which
+                forestlands are most suitable to be developed into carbon
+                credits.
+              </p>
+            </div>
+            <div className="landing-frame9-content-image-container">
+              <img
+                src={`${usecase1}`}
+                alt={"diagram"}
+                loading="lazy"
+                className="landing-frame9-image"
+              />
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="landing-frame9-content-container">
+            <div className="landing-frame9-content-text-container">
+              <p className="landing-frame9-title-text">
+                Identification and Verification of Carbon Credit Assets -
+                Avoided Conversion
+              </p>
+              <p className="landing-frame9-description-text">
+                Al algorithm was trained to detect the risk of deforestation, an
+                opportunity to turn it into an asset of carbon avoidance.
+              </p>
+            </div>
+            <div className="landing-frame9-content-image-container">
+              <img
+                src={`${usecase2}`}
+                alt={"diagram"}
+                loading="lazy"
+                className="landing-frame9-image"
+              />
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="landing-frame9-content-container">
+            <div className="landing-frame9-content-text-container">
+              <p className="landing-frame9-title-text">
+                Identification and Verification of Individual Tree in a Forestry
+                Project
+              </p>
+              <p className="landing-frame9-description-text">
+                Our algorithm is able to recognize crown for Individual tree in
+                a forestry project, generate biomass information, and then
+                calculate the amount of the carbon sink of the project.
+              </p>
+            </div>
+            <div className="landing-frame9-content-image-container">
+              <img
+                src={`${usecase3}`}
+                alt={"diagram"}
+                loading="lazy"
+                className="landing-frame9-image"
+              />
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="container">
       <div className="video-container">
@@ -61,14 +146,13 @@ export default function Landing() {
           </div>
         </div>
         <div className="landing-frame2">
-          <ExploreButton>
-            Explore More <ArrowOutwardIcon />
-          </ExploreButton>
           <div className="landing-frame2-description">
             <div className="landing-frame2-description-container">
               <p className="landing-frame2-description-text">
-                <span style={{ fontWeight: "700" }}>BlockCarbon</span> is a
-                technology-driven platform to support the development of
+                <span className="landing-frame2-highlight-text">
+                  BlockCarbon
+                </span>{" "}
+                is a technology-driven platform to support the development of
                 high-quality carbon credits and bridge them with the global
                 market.
               </p>
@@ -170,31 +254,54 @@ export default function Landing() {
           </div>
           <div className="landing-frame5-content">
             <div className="landing-frame5-left-content">
-              <p className="landing-frame5-left-content-p1-text">
+              <p
+                className={
+                  selectedCard === 1
+                    ? "landing-frame5-left-content-highlight-text"
+                    : "landing-frame5-left-content-normal-text"
+                }
+              >
                 NbS can provide{" "}
-                <span className="landing-frame5-left-content-p1-gradient-text">
+                <span className="landing-frame5-left-content-gradient-text">
                   37%
                 </span>{" "}
                 of the mitigation needed until 2030 to achieve the targets of
                 the Paris Agreement.
               </p>
-              <p className="landing-frame5-left-content-p2-text">
+              <p
+                className={
+                  selectedCard === 2
+                    ? "landing-frame5-left-content-highlight-text"
+                    : "landing-frame5-left-content-normal-text"
+                }
+              >
                 NbS address the climate and{" "}
-                <span className="landing-frame5-left-content-p2-gradient-text">
+                <span className="landing-frame5-left-content-gradient-text">
                   biodiversity
                 </span>{" "}
                 crises in a synergetic and cost-effective manner.
               </p>
-              <p className="landing-frame5-left-content-p2-text">
+              <p
+                className={
+                  selectedCard === 3
+                    ? "landing-frame5-left-content-highlight-text"
+                    : "landing-frame5-left-content-normal-text"
+                }
+              >
                 NbS save developing countries{" "}
-                <span className="landing-frame5-left-content-p2-gradient-text">
+                <span className="landing-frame5-left-content-gradient-text">
                   $393
                 </span>{" "}
                 bln against the economic cost of climate change by 2050.
               </p>
             </div>
             <div className="landing-frame5-right-content">
-              <div className="landing-frame5-right-content-card-container">
+              <div
+                className="landing-frame5-right-content-card-container first"
+                onMouseOver={() => {
+                  setSelectedCard(1);
+                }}
+              >
                 <p
                   className="landing-frame5-right-content-card-heading-text"
                   style={{ color: "#2a3bfb" }}
@@ -205,7 +312,12 @@ export default function Landing() {
                   Planting trees or allowing trees to regrow
                 </p>
               </div>
-              <div className="landing-frame5-right-content-card-container">
+              <div
+                className="landing-frame5-right-content-card-container second"
+                onMouseOver={() => {
+                  setSelectedCard(2);
+                }}
+              >
                 <p
                   className="landing-frame5-right-content-card-heading-text"
                   style={{ color: "#00F4FE" }}
@@ -216,7 +328,12 @@ export default function Landing() {
                   Use best practices that are known to hold carbon in the soil
                 </p>
               </div>
-              <div className="landing-frame5-right-content-card-container">
+              <div
+                className="landing-frame5-right-content-card-container third"
+                onMouseOver={() => {
+                  setSelectedCard(3);
+                }}
+              >
                 <p
                   className="landing-frame5-right-content-card-heading-text"
                   style={{ color: "#8B36E8" }}
@@ -232,7 +349,7 @@ export default function Landing() {
         </div>
         <div className="landing-frame6">
           <div className="landing-frame6-left-content">
-            <p className="landing-frame5-left-content-p1-text">
+            <p className="landing-frame5-left-content-highlight-text">
               Asia lacks cutting-edge technical infrastructure to play its
             </p>
             <p className="landing-frame5-title-gradient-text">
@@ -325,6 +442,33 @@ export default function Landing() {
               </p>
             </div>
           </div>
+        </div>
+        <div className="landing-frame9">
+          <p className="landing-frame9-title-text">Use Cases</p>
+          <div className="landing-frame9-button-container">
+            <ExploreButton
+              onClick={() => {
+                setSelectedTab(1);
+              }}
+            >
+              Blue Carbon
+            </ExploreButton>
+            <ExploreButton
+              onClick={() => {
+                setSelectedTab(2);
+              }}
+            >
+              Avoided Conversion
+            </ExploreButton>
+            <ExploreButton
+              onClick={() => {
+                setSelectedTab(3);
+              }}
+            >
+              Forestry
+            </ExploreButton>
+          </div>
+          {getSelectedTab(selectedTab)}
         </div>
       </div>
     </div>
