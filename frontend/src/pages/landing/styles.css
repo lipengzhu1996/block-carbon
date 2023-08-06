@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 120px;
 }
 
 .landing-container {
@@ -15,6 +16,7 @@
 }
 
 .video-container {
+  padding-top: 120px;
   width: 90%;
   height: 100%;
   position: absolute;

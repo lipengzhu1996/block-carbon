@@ -64,9 +64,26 @@ export default function Navigation() {
             </Link>
           </div>
           <div>
-            <Link href="/projects">
+            <div className="navigation-sub-menu">
               <p className="navigation-menu-text">Solutions</p>
-            </Link>
+              <div className="navigation-menu-content">
+                <p className="navigation-menu-subtitle-text">PRODUCTS</p>
+                <Link href="/projects">
+                  <p className="navigation-menu-text">BlockCarbon Forestry</p>
+                </Link>
+                <Link href="/projects">
+                  <p className="navigation-menu-text">
+                    BlockCarbon Agriculture
+                  </p>
+                </Link>
+                <Link href="/projects">
+                  <p className="navigation-menu-text">BlockCarbon Mangrove</p>
+                </Link>
+                <Link href="/projects">
+                  <p className="navigation-menu-text">BlockCarbon Narratives</p>
+                </Link>
+              </div>
+            </div>
           </div>
           <div>
             <Link href="/projects">
