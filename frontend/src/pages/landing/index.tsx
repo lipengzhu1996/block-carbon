@@ -176,26 +176,8 @@ export default function Landing() {
             className="landing-frame3-image"
           />
         </div>
-        {/* <div className="landing-frame7">
-          <section id="sect1">
-            <img
-              src={`${diagram1}`}
-              alt={"diagram"}
-              loading="lazy"
-              style={{ height: "100vh", padding: "20vh" }}
-            />
-          </section>
-          <section id="sect2">
-            <img
-              src={`${diagram2}`}
-              alt={"diagram"}
-              loading="lazy"
-              style={{ height: "100vh", padding: "20vh" }}
-            />
-          </section>
-        </div> */}
         <div className="landing-frame4">
-          <div className="landing-frame4-text-container">
+          <div className="landing-frame4-title">
             <p className="landing-frame4-heading1-text">
               Why{" "}
               <span className="landing-frame4-heading1-gradient-text">
@@ -206,40 +188,25 @@ export default function Landing() {
                 Important and Urgent?
               </span>
             </p>
-            <p className="landing-frame4-p1-text">
-              400 gigatons is our carbon emission budget to limit the global
-              warming to 1.5C
-            </p>
-            <p className="landing-frame4-p2-text">
-              Most of the countries have pledged net-zero emission targets
-            </p>
           </div>
-          <div className="landing-frame4-diagram-container">
-            <img src={`${diagram1}`} alt={"diagram"} loading="lazy" />
-          </div>
-        </div>
-        <div className="landing-frame4">
-          <div className="landing-frame4-text-container">
-            <p className="landing-frame4-heading1-text">
-              Why{" "}
-              <span className="landing-frame4-heading1-gradient-text">
-                Climate Change
-              </span>{" "}
-              Has Been Such{" "}
-              <span className="landing-frame4-heading1-gradient-text">
-                Important and Urgent?
-              </span>
-            </p>
-            <p className="landing-frame4-p1-text">
-              400 gigatons is our carbon emission budget to limit the global
-              warming to 1.5C
-            </p>
-            <p className="landing-frame4-p2-text">
-              Most of the countries have pledged net-zero emission targets
-            </p>
-          </div>
-          <div className="landing-frame4-diagram-container">
-            <img src={`${diagram2}`} alt={"diagram"} loading="lazy" />
+          <div className="landing-frame4-container">
+            <div className="landing-frame4-card">
+              <p className="landing-frame4-p1-text">
+                400 gigatons is our carbon emission budget to limit the global
+                warming to 1.5C
+              </p>
+              <div className="landing-frame4-diagram-container">
+                <img src={`${diagram1}`} alt={"diagram"} loading="lazy" />
+              </div>
+            </div>
+            <div className="landing-frame4-card">
+              <p className="landing-frame4-p1-text">
+                Most of the countries have pledged net-zero emission targets
+              </p>
+              <div className="landing-frame4-diagram-container">
+                <img src={`${diagram2}`} alt={"diagram"} loading="lazy" />
+              </div>
+            </div>
           </div>
         </div>
         <div className="landing-frame5">
