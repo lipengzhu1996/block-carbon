@@ -1,0 +1,44 @@
+0;256;0c0;256;0c0;256;0c0;256;0c#headerwrap {
+	background: url(../../img/header-bg.jpg) no-repeat center top;
+/*	margin-top: 60px;*/
+	padding-top:140px;
+	text-align:center;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 200px;
+	width: 100%;
+
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#footwrap {
+	background: #2f2f2f;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#footwrap p {
+	color: white;
+}
+
+#footwrap h5 {
+	color: white;
+}
+
+
+#footwrap t {
+	font-weight: 700;
+}
+
+#footwrap i {
+	padding-right: 8px;
+	color: #1abc9c;
+}

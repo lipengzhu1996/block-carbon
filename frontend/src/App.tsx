@@ -11,6 +11,7 @@ import Landing from "./pages/landing";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
+import Mangrove from "./pages/mangrove";
 import ProjectList from "./pages/project/ProjectList";
 import ProjectView from "./pages/project/ProjectView";
 import ProjectCreate from "./pages/project/ProjectCreate";
@@ -31,12 +32,13 @@ export default function App() {
         }}
       >
         <CssBaseline />
-        <Navigation />
+        {/* <Navigation /> */}
         <Routes>
           <Route path="/home" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/projects" element={<ProjectList />} />
+          <Route path="/mangrove" element={<Mangrove />} />
           <Route path="/project/:id" element={<ProjectView />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="" element={<Dashboard />} />
